@@ -197,10 +197,14 @@ HiFo-Prompt/
 
 <br/>
 
-## 📜 Citation
+## 📜 Citation & Community 
 
-If you find HiFo-Prompt useful for your research, please cite our work:
+We are actively maintaining HiFo-Prompt and thrilled to hear from the community!
 
+- Need Help? If you run into any bugs or have feature requests, please check the Issues page or submit a new one.
+- Collaboration: We are open to discussions on AHD and LLMs. Feel free to reach out via email or pull requests. Let's push the boundaries of automated algorithm design together! 🤝
+
+Support Us: If HiFo-Prompt aids your research or if you like our approach, please Star ⭐ or Fork 🍴 this repository. Your support drives our updates!
 ```bibtex
 @article{hifo2025,
   title={HiFo-Prompt: Prompting with Hindsight and Foresight for LLM-based Automatic Heuristic Design},

@@ -216,9 +216,7 @@ Support Us: If HiFo-Prompt aids your research or if you like our approach, pleas
 
 <br/>
 
-## 📄 License
-
-This project is licensed under the **MIT License**.
+## ✨ Acknowledgments  
 
 ---
 

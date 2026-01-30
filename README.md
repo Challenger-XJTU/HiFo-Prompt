@@ -61,7 +61,7 @@ cd HiFo
 
 # 3. Install dependencies
 cd hifo
-pip install -e .
+pip install .
 ```
 
 <br/>

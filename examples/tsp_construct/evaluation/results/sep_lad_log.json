@@ -1,0 +1,106 @@
+[
+    {
+        "generation": 1,
+        "timestamp": 1748279210.957431,
+        "best_fitness": 5.98358,
+        "diversity": 1.0,
+        "current_wisdom_count": 12,
+        "recent_wisdom": [
+            "Use stochastic simulations to explore and evaluate potential future states, guiding decision-making through probabilistic insights.",
+            "Combine lightweight stochastic evaluations with deterministic refinement to balance exploration and exploitation effectively.",
+            "Use adaptive thresholds and dynamic weighting to integrate local decisions with global solution coherence."
+        ],
+        "meta_guidance": null
+    },
+    {
+        "generation": 2,
+        "timestamp": 1748279487.0261781,
+        "best_fitness": 5.98358,
+        "diversity": 1.0,
+        "current_wisdom_count": 16,
+        "recent_wisdom": [
+            "Use adaptive thresholds and iterative refinement (e.g., beam search) to focus computational effort on the most promising regions of the solution space.",
+            "Combine local greedy decisions with global evaluation metrics to ensure both short-term efficiency and long-term coherence in solution quality.",
+            "Use lightweight stochastic simulations to approximate future outcomes and guide informed decision-making under uncertainty."
+        ],
+        "meta_guidance": null
+    },
+    {
+        "generation": 3,
+        "timestamp": 1748279727.4572852,
+        "best_fitness": 5.96185,
+        "diversity": 1.0,
+        "current_wisdom_count": 21,
+        "recent_wisdom": [
+            "Combine lightweight simulations with structured search techniques to efficiently explore the solution space while maintaining computational feasibility.",
+            "Use adaptive thresholds and dynamic weighting to balance exploration of local options with alignment to global objectives in decision-making processes.",
+            "Incorporate domain-aware heuristics to dynamically guide the search process."
+        ],
+        "meta_guidance": null
+    },
+    {
+        "generation": 4,
+        "timestamp": 1748280162.5750442,
+        "best_fitness": 5.96185,
+        "diversity": 1.0,
+        "current_wisdom_count": 21,
+        "recent_wisdom": [
+            "Combine lightweight simulations with structured search techniques to efficiently explore the solution space while maintaining computational feasibility.",
+            "Use adaptive thresholds and dynamic weighting to balance exploration of local options with alignment to global objectives in decision-making processes.",
+            "Incorporate domain-aware heuristics to dynamically guide the search process."
+        ],
+        "meta_guidance": null
+    },
+    {
+        "generation": 5,
+        "timestamp": 1748280301.526241,
+        "best_fitness": 5.96185,
+        "diversity": 1.0,
+        "current_wisdom_count": 22,
+        "recent_wisdom": [
+            "Use adaptive thresholds and dynamic weighting to balance exploration of local options with alignment to global objectives in decision-making processes.",
+            "Incorporate domain-aware heuristics to dynamically guide the search process.",
+            "Incorporate adaptive weighting schemes to dynamically adjust the influence of competing objectives based on instance-specific characteristics."
+        ],
+        "meta_guidance": null
+    },
+    {
+        "generation": 6,
+        "timestamp": 1748280759.5802429,
+        "best_fitness": 5.96053,
+        "diversity": 1.0,
+        "current_wisdom_count": 24,
+        "recent_wisdom": [
+            "Incorporate adaptive weighting schemes to dynamically adjust the influence of competing objectives based on instance-specific characteristics.",
+            "Incorporate adaptive weighting mechanisms to dynamically prioritize competing objectives based on instance-specific characteristics.",
+            "Incorporate adaptive weighting mechanisms to dynamically adjust decision criteria based on instance-specific features."
+        ],
+        "meta_guidance": null
+    },
+    {
+        "generation": 7,
+        "timestamp": 1748280918.113041,
+        "best_fitness": 5.95025,
+        "diversity": 1.0,
+        "current_wisdom_count": 27,
+        "recent_wisdom": [
+            "Combine short-term evaluations (e.g., local cost minimization) with long-term predictions (e.g., Monte Carlo simulations) to guide decision-making in dynamic environments.",
+            "Use hierarchical refinement techniques, such as beam search, to iteratively narrow down candidate solutions while preserving diversity in the search space.",
+            "Use stochastic simulations (e.g., Monte Carlo rollouts) to assess candidate choices, enabling robustness against uncertainty and variability in problem instances."
+        ],
+        "meta_guidance": null
+    },
+    {
+        "generation": 8,
+        "timestamp": 1748281095.341133,
+        "best_fitness": 5.95025,
+        "diversity": 1.0,
+        "current_wisdom_count": 30,
+        "recent_wisdom": [
+            "Implement adaptive mechanisms that respond to problem instance characteristics, dynamically adjusting strategies to reduce computational overhead while enhancing exploration diversity.",
+            "Balance local optimization with global solution structure when making decisions.",
+            "Leverage stochastic evaluations to explore diverse candidate solutions while controlling computational overhead."
+        ],
+        "meta_guidance": null
+    }
+]

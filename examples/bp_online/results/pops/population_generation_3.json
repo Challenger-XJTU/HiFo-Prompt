@@ -1,0 +1,138 @@
+[
+     {
+          "algorithm": "The algorithm refines bin assignment by integrating a hybrid scoring mechanism that combines capacity utilization, exponential bias, and a learned penalty term derived from historical overfill patterns to enhance precision in decision-making.",
+          "code": "import numpy as np\n\ndef score(item, bins):\n    # Compute normalized capacity and utilization\n    normalized_capacity = bins / np.max(bins)\n    capacity_utilization = 1 - (bins - item) / np.max(bins)\n    \n    # Exponential decay bias for remaining capacity\n    bias_factor = np.exp(-0.5 * (bins - item))\n    \n    # Penalty term based on deviation from optimal fill level (learned heuristic)\n    optimal_fill_ratio = 0.8  # Hypothetical learned optimal fill ratio\n    penalty_term = np.abs((bins - item) / np.max(bins) - optimal_fill_ratio)\n    \n    # Combine factors into a composite score with refined weighting\n    scores = (normalized_capacity * capacity_utilization + bias_factor) / (1 + penalty_term)\n    return scores",
+          "objective": 0.01348,
+          "other_inf": null,
+          "metadata": {
+               "operator": "m1",
+               "wisdom_tips": [
+                    "Design adaptive hybrid meta-heuristics synergistically fusing multiple search paradigms and dynamically tune operator parameters based on search stage or problem features",
+                    "Employ machine learning or pattern recognition to mine deep problem structures and optimal solution patterns then use learned insights to intelligently bias towards promising search regions or constructive choices",
+                    "Explore objective function engineering by introducing auxiliary or surrogate objectives or by dynamically adjusting weights to reshape the search landscape aiding escape from local optima or guiding diverse exploration"
+               ],
+               "attention_focus": "improving precision of existing heuristics and rules",
+               "generation_tendency": "focus_exploitation",
+               "timestamp": 1757692164.934689
+          }
+     },
+     {
+          "algorithm": "Design a hybrid scoring algorithm that integrates capacity utilization, normalized bin diversity, and an adaptive weighting mechanism to dynamically balance exploration and exploitation during bin assignment.",
+          "code": "import numpy as np\n\ndef score(item, bins):\n    # Compute normalized capacity utilization\n    normalized_capacity = bins / np.max(bins)\n    capacity_utilization = 1 - (bins - item) / np.max(bins)\n    \n    # Introduce diversity factor to encourage balanced bin usage\n    diversity_factor = np.exp(-np.std(bins - item) / np.mean(bins))\n    \n    # Adaptive weighting based on remaining capacity\n    adaptive_weight = np.log(1 + bins - item) / np.log(1 + np.max(bins))\n    \n    # Combine factors into a composite score with dynamic weighting\n    scores = (normalized_capacity * capacity_utilization \n              + diversity_factor * adaptive_weight \n              + 1 / (1 + np.sqrt(bins - item)))\n    return scores",
+          "objective": 0.0166,
+          "other_inf": null,
+          "metadata": {
+               "operator": "m2",
+               "wisdom_tips": [
+                    "Integrate learned historical patterns with real-time decision metrics to guide optimization dynamically.",
+                    "Combine multiple scoring dimensions to refine decision granularity and improve solution quality.",
+                    "Design adaptive hybrid meta-heuristics synergistically fusing multiple search paradigms and dynamically tune operator parameters based on search stage or problem features"
+               ],
+               "attention_focus": "experimenting with hybrid strategy combinations",
+               "generation_tendency": "focus_exploration",
+               "timestamp": 1757692558.469847
+          }
+     },
+     {
+          "algorithm": "```",
+          "code": "import numpy as np\n\ndef score(item, bins):\n    # Compute normalized capacity utilization\n    normalized_capacity = bins / np.max(bins)\n    capacity_utilization = 1 - (bins - item) / np.max(bins)\n    \n    # Simplified diversity factor to encourage balanced bin usage\n    diversity_factor = np.exp(-np.std(bins - item))\n    \n    # Adaptive weighting based on remaining capacity\n    adaptive_weight = (bins - item) / np.max(bins)\n    \n    # Combine factors into a composite score with simplified dynamic weighting\n    scores = (normalized_capacity * capacity_utilization \n              + diversity_factor * adaptive_weight \n              + 1 / (1 + (bins - item)))\n    return scores",
+          "objective": 0.02183,
+          "other_inf": null,
+          "metadata": {
+               "operator": "m3",
+               "wisdom_tips": [
+                    "Design adaptive hybrid meta-heuristics synergistically fusing multiple search paradigms and dynamically tune operator parameters based on search stage or problem features",
+                    "Employ machine learning or pattern recognition to mine deep problem structures and optimal solution patterns then use learned insights to intelligently bias towards promising search regions or constructive choices",
+                    "Explore objective function engineering by introducing auxiliary or surrogate objectives or by dynamically adjusting weights to reshape the search landscape aiding escape from local optima or guiding diverse exploration"
+               ],
+               "attention_focus": "optimizing established successful strategies and patterns",
+               "generation_tendency": "focus_exploitation",
+               "timestamp": 1757692585.075998
+          }
+     },
+     {
+          "algorithm": "The new algorithm integrates dynamic historical utilization trends, real-time capacity metrics, and adaptive weighting schemes to compute bin scores for optimal assignment.",
+          "code": "import numpy as np\n\ndef score(item, bins):\n    # Compute normalized capacity and utilization\n    max_capacity = np.max(bins)\n    normalized_capacity = bins / max_capacity\n    capacity_utilization = 1 - (bins - item) / max_capacity\n    \n    # Adaptive bias factor based on remaining capacity and item size\n    bias_factor = np.exp(-0.5 * (bins - item)) + 0.1 * (bins / max_capacity)\n    \n    # Historical trend influence factor\n    historical_trend = np.log1p(1 / (1 + np.abs(bins - np.mean(bins))))\n    \n    # Combine factors with adaptive weighting\n    adaptive_weight = 0.6 + 0.4 * (1 - capacity_utilization)\n    scores = (adaptive_weight * normalized_capacity * capacity_utilization +\n              (1 - adaptive_weight) * bias_factor + 0.2 * historical_trend)\n    \n    return scores",
+          "objective": 0.02867,
+          "other_inf": null,
+          "metadata": {
+               "operator": "m2",
+               "wisdom_tips": [
+                    "Integrate learned historical patterns with real-time decision metrics to guide optimization dynamically.",
+                    "Combine multiple scoring dimensions to refine decision granularity and improve solution quality.",
+                    "Design adaptive hybrid meta-heuristics synergistically fusing multiple search paradigms and dynamically tune operator parameters based on search stage or problem features"
+               ],
+               "attention_focus": "optimizing objective function evaluation criteria",
+               "generation_tendency": "balanced_search",
+               "timestamp": 1757692535.832136
+          }
+     },
+     {
+          "algorithm": "Design a dynamic hybrid scoring mechanism that integrates adaptive historical weight adjustments, balances local and global capacity gradients with non-linear scaling, and incorporates stochastic threshold modulation for enhanced robustness.",
+          "code": "import numpy as np\n\ndef score(item, bins):\n    # Compute remaining capacity after placing the item\n    remaining_capacity = bins - item\n    \n    # Adaptive historical bias factor based on smoothed utilization trends\n    historical_bias = np.exp(-remaining_capacity / (np.median(bins) + 1e-6)) ** 1.2\n    \n    # Non-linear local utilization gradient to assess immediate bin efficiency\n    utilization_gradient = (item / (bins + 1e-6)) ** 0.8\n    \n    # Global diversity-driven exploration with exponential scaling\n    diversity_factor = np.log1p(1 / (remaining_capacity + 1e-6)) ** 1.5 * (1 + historical_bias)\n    \n    # Stochastic threshold penalty to modulate overfilling or underfilling dynamically\n    threshold_penalty = np.tanh((remaining_capacity - np.mean(remaining_capacity)) / (np.std(remaining_capacity) + 1e-6)) * (1 - utilization_gradient)\n    \n    # Hybrid scoring combining all factors with fine-tuned weights\n    scores = (utilization_gradient * diversity_factor ** 0.9) - (threshold_penalty * historical_bias ** 0.7)\n    \n    return scores",
+          "objective": 0.03109,
+          "other_inf": null,
+          "metadata": {
+               "operator": "m2",
+               "wisdom_tips": [
+                    "Integrate learned historical patterns with real-time decision metrics to guide optimization dynamically.",
+                    "Combine multiple scoring dimensions to refine decision granularity and improve solution quality.",
+                    "Design adaptive hybrid meta-heuristics synergistically fusing multiple search paradigms and dynamically tune operator parameters based on search stage or problem features"
+               ],
+               "attention_focus": "improving algorithm robustness across different problem instances",
+               "generation_tendency": "balanced_search",
+               "timestamp": 1757692535.834312
+          }
+     },
+     {
+          "algorithm": "The algorithm dynamically assigns items to bins by computing a score for each bin based on remaining capacity, item size, and a learned bias factor derived from historical patterns, aiming to minimize total bins used while maintaining computational efficiency.",
+          "code": "import numpy as np\n\ndef score(item, bins):\n    # Compute scores based on remaining capacity and adaptive biases\n    normalized_capacity = bins / np.max(bins)\n    capacity_utilization = 1 - (bins - item) / np.max(bins)\n    bias_factor = np.exp(-0.5 * (bins - item))  # Exponential decay bias\n    \n    # Combine factors into a composite score\n    scores = normalized_capacity * capacity_utilization + bias_factor\n    return scores",
+          "objective": 0.0323,
+          "other_inf": null,
+          "metadata": {
+               "operator": "i1",
+               "wisdom_tips": [
+                    "Design adaptive hybrid meta-heuristics synergistically fusing multiple search paradigms and dynamically tune operator parameters based on search stage or problem features",
+                    "Employ machine learning or pattern recognition to mine deep problem structures and optimal solution patterns then use learned insights to intelligently bias towards promising search regions or constructive choices",
+                    "Explore objective function engineering by introducing auxiliary or surrogate objectives or by dynamically adjusting weights to reshape the search landscape aiding escape from local optima or guiding diverse exploration"
+               ],
+               "attention_focus": "managing computational complexity and time efficiency",
+               "generation_tendency": "balanced_search",
+               "timestamp": 1757692009.309697
+          }
+     },
+     {
+          "algorithm": "Design a hybrid meta-heuristic score function that integrates learned biases from residual capacity patterns, dynamic weighting of bin utilization with sinusoidal modulation, and a clustering-based penalty system to guide item placement.",
+          "code": "import numpy as np\n\ndef score(item, bins):\n    # Calculate the remaining capacity after placing the item\n    remaining_capacity = bins - item\n    \n    # Compute utilization ratio (how full the bin would be after adding the item)\n    utilization_ratio = 1 - (remaining_capacity / bins)\n    \n    # Apply sinusoidal modulation to utilization for adaptive emphasis on mid-capacity bins\n    modulated_utilization = utilization_ratio * (1 + 0.5 * np.sin(2 * np.pi * utilization_ratio))\n    \n    # Compute size difference with logarithmic scaling to prioritize compact packing\n    size_difference = np.log1p(1 / (remaining_capacity + 1e-6))\n    \n    # Cluster bins based on residual capacity and penalize outliers using Gaussian penalty\n    mean_residual = np.mean(remaining_capacity)\n    std_residual = np.std(remaining_capacity)\n    cluster_penalty = np.exp(-((remaining_capacity - mean_residual) ** 2) / (2 * (std_residual + 1e-6) ** 2))\n    \n    # Dynamic weighting of metrics based on problem features and learned biases\n    weight_utilization = 0.4 + 0.3 * (1 - np.std(utilization_ratio))  # Adjust based on variance\n    weight_size_diff = 0.3 + 0.2 * (1 - np.std(size_difference))      # Adjust based on variance\n    weight_penalty = 0.3 + 0.1 * (1 - np.std(cluster_penalty))        # Adjust based on variance\n    \n    # Combine the metrics into a composite score with adaptive weights\n    scores = (weight_utilization * modulated_utilization +\n              weight_size_diff * size_difference -\n              weight_penalty * cluster_penalty)\n    \n    return scores",
+          "objective": 0.03401,
+          "other_inf": null,
+          "metadata": {
+               "operator": "m2",
+               "wisdom_tips": [
+                    "Incorporate learned biases and dynamic scoring to guide decisions based on historical patterns and evolving problem states.",
+                    "Design adaptive hybrid meta-heuristics synergistically fusing multiple search paradigms and dynamically tune operator parameters based on search stage or problem features",
+                    "Employ machine learning or pattern recognition to mine deep problem structures and optimal solution patterns then use learned insights to intelligently bias towards promising search regions or constructive choices"
+               ],
+               "attention_focus": "considering completely different algorithmic paradigms",
+               "generation_tendency": "balanced_search",
+               "timestamp": 1757692188.767172
+          }
+     },
+     {
+          "algorithm": "```",
+          "code": "import numpy as np\n\ndef score(item, bins):\n    # Compute capacity utilization and remaining capacity ratio\n    capacity_utilization = (bins - item) / np.max(bins)\n    remaining_capacity_ratio = bins / (bins - item + 1e-6)\n    \n    # Introduce a dynamic weighting factor based on historical patterns\n    historical_weight = np.exp(-0.1 * (bins - item)) * np.log1p(np.sum(bins))\n    \n    # Combine factors with adaptive hybrid scoring methodology\n    scores = (capacity_utilization ** 2) * remaining_capacity_ratio + historical_weight\n    return scores",
+          "objective": 0.03763,
+          "other_inf": null,
+          "metadata": {
+               "operator": "e2",
+               "wisdom_tips": [
+                    "Integrate learned historical patterns with real-time decision metrics to enhance the precision and adaptability of optimization strategies.",
+                    "Combine multiple scoring dimensions, such as capacity utilization and bias factors, to guide decisions toward globally efficient outcomes while preserving computational efficiency.",
+                    "Design adaptive hybrid meta-heuristics synergistically fusing multiple search paradigms and dynamically tune operator parameters based on search stage or problem features"
+               ],
+               "attention_focus": "exploring novel solution construction methodologies",
+               "generation_tendency": "balanced_search",
+               "timestamp": 1757692479.832011
+          }
+     }
+]

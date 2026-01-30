@@ -1,0 +1,17 @@
+{
+     "algorithm": "```",
+     "code": "import numpy as np\n\ndef update_edge_distance(edge_distance, local_opt_tour, edge_n_used):\n    num_nodes = edge_distance.shape[0]\n    updated_edge_distance = edge_distance.copy()\n    \n    # Simplified parameter initialization\n    topology_penalty_weight = 0.5\n    smoothing_factor = 0.1\n    \n    # Simplified topology-aware penalties based on local optimal tour\n    for i in range(len(local_opt_tour) - 1):\n        u, v = local_opt_tour[i], local_opt_tour[i + 1]\n        penalty = topology_penalty_weight * (1 + np.exp(-edge_n_used[u, v]))\n        updated_edge_distance[u, v] += penalty\n        updated_edge_distance[v, u] = updated_edge_distance[u, v]\n    \n    # Simplified stochastic perturbations with adaptive scaling\n    gradient_perturbation = np.random.uniform(-smoothing_factor, smoothing_factor, (num_nodes, num_nodes))\n    updated_edge_distance += gradient_perturbation\n    \n    # Ensure no negative distances\n    updated_edge_distance = np.maximum(updated_edge_distance, 0)\n    \n    return updated_edge_distance",
+     "objective": 0.21461,
+     "other_inf": null,
+     "metadata": {
+          "operator": "m3",
+          "wisdom_tips": [
+               "Design adaptive hybrid meta-heuristics synergistically fusing multiple search paradigms and dynamically tune operator parameters based on search stage or problem features",
+               "Employ machine learning or pattern recognition to mine deep problem structures and optimal solution patterns then use learned insights to intelligently bias towards promising search regions or constructive choices",
+               "Explore objective function engineering by introducing auxiliary or surrogate objectives or by dynamically adjusting weights to reshape the search landscape aiding escape from local optima or guiding diverse exploration"
+          ],
+          "attention_focus": "experimenting with hybrid strategy combinations",
+          "generation_tendency": "focus_exploration",
+          "timestamp": 1757180120.721326
+     }
+}

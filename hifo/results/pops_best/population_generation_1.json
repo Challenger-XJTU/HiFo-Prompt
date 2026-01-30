@@ -1,0 +1,17 @@
+{
+     "algorithm": "node: node for node in nodes",
+     "code": "import numpy as np\n\ndef select_next_node(current_node, destination_node, unvisited_nodes, distance_matrix):\n    def mst_heuristic(nodes, dist_matrix):\n        if len(nodes) == 0:\n            return 0\n        edges = [(dist_matrix[i][j], i, j) for i in nodes for j in nodes if i < j]\n        edges.sort(key=lambda x: x[0])\n        parent = {node: node for node in nodes}\n        \n        def find(u):\n            while parent[u] != u:\n                parent[u] = parent[parent[u]]\n                u = parent[u]\n            return u\n        \n        mst_cost = 0\n        for cost, u, v in edges:\n            if find(u) != find(v):\n                parent[find(v)] = find(u)\n                mst_cost += cost\n        return mst_cost\n    \n    def reinforcement_score(node, remaining_nodes, dist_matrix):\n        future_cost = mst_heuristic(remaining_nodes, dist_matrix)\n        return distance_matrix[current_node][node] + future_cost\n    \n    # Adaptive candidate set generation\n    candidate_set_size = max(3, len(unvisited_nodes) // 2)\n    candidate_set = sorted(unvisited_nodes, key=lambda x: distance_matrix[current_node][x])[:candidate_set_size]\n    \n    # Hybrid scoring mechanism\n    scores = []\n    for node in candidate_set:\n        remaining_after_choice = [n for n in unvisited_nodes if n != node]\n        score = reinforcement_score(node, remaining_after_choice, distance_matrix)\n        scores.append((node, score))\n    \n    # Select the node with the lowest score\n    next_node = min(scores, key=lambda x: x[1])[0]\n    return next_node",
+     "objective": 6.38352,
+     "other_inf": null,
+     "metadata": {
+          "operator": "m3",
+          "wisdom_tips": [
+               "Design adaptive hybrid meta-heuristics synergistically fusing multiple search paradigms and dynamically tune operator parameters based on search stage or problem features",
+               "Employ machine learning or pattern recognition to mine deep problem structures and optimal solution patterns then use learned insights to intelligently bias towards promising search regions or constructive choices",
+               "Explore objective function engineering by introducing auxiliary or surrogate objectives or by dynamically adjusting weights to reshape the search landscape aiding escape from local optima or guiding diverse exploration"
+          ],
+          "attention_focus": "managing computational complexity and time efficiency",
+          "generation_tendency": "balanced_search",
+          "timestamp": 1748448095.1695201
+     }
+}

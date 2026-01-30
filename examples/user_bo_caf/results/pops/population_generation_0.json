@@ -1,0 +1,53 @@
+[
+     {
+          "algorithm": "The algorithm computes utility by combining predictive mean and standard deviation of unobserved inputs with cost-aware budget allocation, dynamically adjusting exploration-exploitation tradeoff based on remaining budget and historical performance patterns.",
+          "code": "import torch\n\ndef utility(train_x, train_y, best_x, best_y, test_x, mean_test_y, std_test_y, cost_test_y, budget_used, budget_total):\n    n_train, dim = train_x.shape\n    n_test = test_x.shape[0]\n    \n    # Compute normalized remaining budget\n    remaining_budget = (budget_total - budget_used) / budget_total\n    \n    # Scale exploration term by remaining budget to encourage exploitation as budget dwindles\n    exploration_term = std_test_y * remaining_budget\n    \n    # Scale exploitation term by distance to the current best solution in input space\n    distance_to_best = torch.norm(test_x - best_x, dim=1)\n    scaled_distance = 1 / (1 + distance_to_best)  # Inverse distance for exploitation bias\n    exploitation_term = mean_test_y * scaled_distance\n    \n    # Cost penalty: penalize high-cost evaluations more aggressively as budget decreases\n    cost_penalty = cost_test_y / (1 + remaining_budget)\n    \n    # Combine terms into utility function\n    utility_value = exploitation_term + exploration_term - cost_penalty\n    \n    return utility_value",
+          "objective": 4.74029,
+          "other_inf": null,
+          "metadata": {
+               "operator": "i1",
+               "wisdom_tips": [
+                    "Employ machine learning or pattern recognition to mine deep problem structures and optimal solution patterns then use learned insights to intelligently bias towards promising search regions or constructive choices",
+                    "Explore objective function engineering by introducing auxiliary or surrogate objectives or by dynamically adjusting weights to reshape the search landscape aiding escape from local optima or guiding diverse exploration",
+                    "Construct problem specialized efficient solution representations and co design dedicated core operators to fully leverage representation structure for powerful solution space exploration"
+               ],
+               "attention_focus": "managing computational complexity and time efficiency",
+               "generation_tendency": "balanced_search",
+               "timestamp": 1752306752.723721
+          }
+     },
+     {
+          "algorithm": "Propose a utility function that dynamically balances exploration and exploitation by integrating the predicted mean and uncertainty of the objective, cost efficiency, proximity to the best solution, and remaining budget into a composite score favoring long-term optimization success.",
+          "code": "import torch\n\ndef utility(train_x, train_y, best_x, best_y, test_x, mean_test_y, std_test_y, cost_test_y, budget_used, budget_total):\n    # Compute distance to the best solution found so far\n    dist_to_best = torch.norm(test_x - best_x, dim=1)\n    \n    # Normalize the distance by the maximum distance in the training set for scaling\n    max_train_dist = torch.max(torch.cdist(train_x, train_x)).item()\n    normalized_dist = dist_to_best / max_train_dist\n    \n    # Compute improvement potential over the best solution (exploitation)\n    improvement_potential = torch.clamp(mean_test_y - best_y, min=0)\n    \n    # Scale uncertainty by the remaining budget ratio to encourage exploration when budget permits\n    remaining_budget_ratio = (budget_total - budget_used) / budget_total\n    scaled_uncertainty = std_test_y * remaining_budget_ratio\n    \n    # Penalize high-cost evaluations relative to the average cost of evaluated points\n    avg_cost = torch.mean(cost_test_y)\n    cost_penalty = torch.clamp(cost_test_y / avg_cost, min=1.0)\n    \n    # Combine components into the utility function\n    utility_value = (improvement_potential + scaled_uncertainty) / (normalized_dist + cost_penalty)\n    \n    return utility_value",
+          "objective": 8.93178,
+          "other_inf": null,
+          "metadata": {
+               "operator": "i1",
+               "wisdom_tips": [
+                    "Explore objective function engineering by introducing auxiliary or surrogate objectives or by dynamically adjusting weights to reshape the search landscape aiding escape from local optima or guiding diverse exploration",
+                    "Construct problem specialized efficient solution representations and co design dedicated core operators to fully leverage representation structure for powerful solution space exploration",
+                    "Implement intelligent diversification and restart strategies based on solution feature space analysis systematically targeting uncovered feature regions to promote global search coverage and escape deep local optima"
+               ],
+               "attention_focus": "considering long-term impact of current decisions",
+               "generation_tendency": "balanced_search",
+               "timestamp": 1752307160.53163
+          }
+     },
+     {
+          "algorithm": "Propose a utility function that dynamically balances exploration-exploitation by combining predictive mean, uncertainty, cost-efficiency, and budget-awareness while adapting to the problem's heterogeneity.",
+          "code": "import torch\n\ndef utility(train_x, train_y, best_x, best_y, test_x, mean_test_y, std_test_y, cost_test_y, budget_used, budget_total):\n    n_train = train_x.size(0)\n    dim = train_x.size(1)\n    n_test = test_x.size(0)\n\n    # Compute improvement potential over current best\n    improvement = torch.clamp(mean_test_y - best_y, min=0.0)\n\n    # Normalize improvement by the range of observed function values\n    y_range = torch.max(train_y) - torch.min(train_y)\n    normalized_improvement = improvement / (y_range + 1e-8)\n\n    # Scale uncertainty by dimensionality to balance exploration\n    scaled_uncertainty = std_test_y / torch.sqrt(torch.tensor(dim, dtype=torch.float64))\n\n    # Cost-efficiency term: prioritize low-cost evaluations\n    avg_cost = torch.mean(cost_test_y)\n    cost_efficiency = 1.0 / (cost_test_y / (avg_cost + 1e-8))\n\n    # Budget-awareness term: penalize high-cost evaluations as budget depletes\n    budget_remaining = budget_total - budget_used\n    budget_ratio = budget_remaining / (budget_total + 1e-8)\n    budget_penalty = torch.clamp(cost_test_y / budget_remaining, max=1.0)\n\n    # Combine terms with adaptive weights based on search stage\n    exploration_weight = 1.0 - budget_ratio  # Increase exploration as budget decreases\n    exploitation_weight = budget_ratio       # Focus on exploitation early on\n\n    utility_value = (\n        exploitation_weight * normalized_improvement +\n        exploration_weight * scaled_uncertainty +\n        cost_efficiency * (1.0 - budget_penalty)\n    )\n\n    return utility_value",
+          "objective": 14.10535,
+          "other_inf": null,
+          "metadata": {
+               "operator": "i1",
+               "wisdom_tips": [
+                    "Design adaptive hybrid meta-heuristics synergistically fusing multiple search paradigms and dynamically tune operator parameters based on search stage or problem features",
+                    "Employ machine learning or pattern recognition to mine deep problem structures and optimal solution patterns then use learned insights to intelligently bias towards promising search regions or constructive choices",
+                    "Explore objective function engineering by introducing auxiliary or surrogate objectives or by dynamically adjusting weights to reshape the search landscape aiding escape from local optima or guiding diverse exploration"
+               ],
+               "attention_focus": "improving algorithm robustness across different problem instances",
+               "generation_tendency": "balanced_search",
+               "timestamp": 1752306591.5899231
+          }
+     }
+]

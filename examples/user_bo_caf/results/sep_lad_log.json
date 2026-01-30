@@ -1,0 +1,66 @@
+[
+    {
+        "generation": 1,
+        "timestamp": 1752309141.551797,
+        "best_fitness": 3.66957,
+        "diversity": 1.0,
+        "current_wisdom_count": 11,
+        "recent_wisdom": [
+            "Integrate cost-awareness into utility computations to ensure efficient allocation of resources while pursuing high-reward solutions.",
+            "Dynamically adjust the exploration-exploitation tradeoff by incorporating cost-aware budget allocation and historical performance feedback to optimize resource utilization.",
+            "Integrate adaptive objective transformations and diversification strategies to systematically target underexplored regions while maintaining a balance between search efficiency and solution quality."
+        ],
+        "meta_guidance": [
+            "focus_exploration",
+            "exploring novel solution construction methodologies"
+        ]
+    },
+    {
+        "generation": 2,
+        "timestamp": 1752311037.626276,
+        "best_fitness": 2.13095,
+        "diversity": 0.9642857142857143,
+        "current_wisdom_count": 20,
+        "recent_wisdom": [
+            "Integrate adaptive resource allocation mechanisms that scale based on problem-specific feedback to optimize performance across diverse instances.",
+            "Dynamically balance exploration and exploitation by integrating cost-efficiency and uncertainty metrics to guide decision-making under varying conditions.",
+            "Use adaptive resource allocation strategies that scale based on problem-specific feedback to enhance both efficiency and solution quality."
+        ],
+        "meta_guidance": [
+            "focus_exploration",
+            "experimenting with hybrid strategy combinations"
+        ]
+    },
+    {
+        "generation": 3,
+        "timestamp": 1752312870.497779,
+        "best_fitness": 2.08031,
+        "diversity": 0.8928571428571429,
+        "current_wisdom_count": 26,
+        "recent_wisdom": [
+            "Leverage multi-scale adaptivity to modulate the influence of local and global information, ensuring robustness across varying problem complexities.",
+            "Integrate exploration and exploitation dynamically by combining uncertainty modulation with cost-aware efficiency to guide decision-making.",
+            "Scale algorithmic components adaptively based on problem constraints, such as budget or resource availability, to ensure robust performance across varying conditions."
+        ],
+        "meta_guidance": [
+            "focus_exploration",
+            "introducing new randomization or adaptive mechanisms"
+        ]
+    },
+    {
+        "generation": 4,
+        "timestamp": 1752315074.918866,
+        "best_fitness": 2.08031,
+        "diversity": 0.8928571428571429,
+        "current_wisdom_count": 30,
+        "recent_wisdom": [
+            "Integrate exploration and exploitation dynamically by leveraging spatial relationships and uncertainty estimates to guide decision-making.",
+            "Incorporate cost-awareness and resource constraints into the optimization process to ensure efficient use of available resources.",
+            "Incorporate cost-aware efficiency into the optimization process by scaling decisions based on resource constraints and instance-specific characteristics."
+        ],
+        "meta_guidance": [
+            "focus_exploration",
+            "investigating alternative problem decomposition approaches"
+        ]
+    }
+]

@@ -1,0 +1,17 @@
+{
+     "algorithm": "A new algorithm that uses adaptive cluster-aware lookahead and structural diversity scoring to prioritize nodes, reducing computational overhead by pruning redundant evaluations.}\n\n```python\nimport numpy as np\n\ndef select_next_node(current_node, destination_node, unvisited_nodes, distance_matrix):\n    def cluster_score(node):\n        neighbors = sorted(unvisited_nodes, key=lambda x: distance_matrix[node][x])[:3]\n        return np.mean([distance_matrix[node][n] for n in neighbors])\n    \n    def lookahead_cost(node):\n        remaining = list(unvisited_nodes)\n        remaining.remove(node)\n        path_cost = distance_matrix[current_node][node]\n        last = node\n        while remaining:\n            next_step = min(remaining, key=lambda x: distance_matrix[last][x])\n            path_cost += distance_matrix[last][next_step]\n            last = next_step\n            remaining.remove(next_step)\n        return path_cost + distance_matrix[last][destination_node]\n    \n    candidates = sorted(unvisited_nodes, key=lambda x: distance_matrix[current_node][x])[:min(5, len(unvisited_nodes))]\n    scores = {",
+     "code": "import numpy as np\n\ndef select_next_node(current_node, destination_node, unvisited_nodes, distance_matrix):\n    def cluster_score(node):\n        neighbors = sorted(unvisited_nodes, key=lambda x: distance_matrix[node][x])[:3]\n        return np.mean([distance_matrix[node][n] for n in neighbors])\n    \n    def lookahead_cost(node):\n        remaining = list(unvisited_nodes)\n        remaining.remove(node)\n        path_cost = distance_matrix[current_node][node]\n        last = node\n        while remaining:\n            next_step = min(remaining, key=lambda x: distance_matrix[last][x])\n            path_cost += distance_matrix[last][next_step]\n            last = next_step\n            remaining.remove(next_step)\n        return path_cost + distance_matrix[last][destination_node]\n    \n    candidates = sorted(unvisited_nodes, key=lambda x: distance_matrix[current_node][x])[:min(5, len(unvisited_nodes))]\n    scores = {}\n    for candidate in candidates:\n        direct_cost = distance_matrix[current_node][candidate]\n        cluster_quality = cluster_score(candidate)\n        future_cost = lookahead_cost(candidate)\n        normalized_cost = direct_cost / (np.median(distance_matrix[current_node]) + 1e-6)\n        scores[candidate] = (\n            0.5 * future_cost +\n            0.3 * cluster_quality +\n            0.2 * normalized_cost\n        )\n    \n    next_node = min(scores, key=scores.get)\n    return next_node",
+     "objective": 5.96144,
+     "other_inf": null,
+     "metadata": {
+          "operator": "e2",
+          "wisdom_tips": [
+               "Combine greedy local decisions with global structural insights to guide the search process effectively.",
+               "Use adaptive weighting and lookahead strategies to balance exploration in early stages with exploitation in later stages.",
+               "Integrate machine learning and domain-specific heuristics to dynamically adjust decision weights, ensuring exploration-exploitation trade-offs align with problem progress."
+          ],
+          "attention_focus": "reducing unnecessary computational overhead and redundancy",
+          "generation_tendency": "focus_exploitation",
+          "timestamp": 1758183783.619864
+     }
+}

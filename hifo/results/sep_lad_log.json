@@ -1,0 +1,106 @@
+[
+    {
+        "generation": 1,
+        "timestamp": 1748448131.17858,
+        "best_fitness": 6.38352,
+        "diversity": 1.0,
+        "current_wisdom_count": 15,
+        "recent_wisdom": [
+            "Leverage hierarchical or structural insights, such as clustering or MST-based normalization, to guide decision-making while preserving computational efficiency.",
+            "Dynamically adjust exploration-exploitation trade-offs by incorporating feedback-driven scoring and reinforcement learning-inspired strategies to refine decision-making over time.",
+            "Leverage hierarchical or cluster-based organization of the solution space to efficiently manage complexity and focus computational effort on promising regions."
+        ],
+        "meta_guidance": null
+    },
+    {
+        "generation": 2,
+        "timestamp": 1748448313.422202,
+        "best_fitness": 5.94059,
+        "diversity": 1.0,
+        "current_wisdom_count": 23,
+        "recent_wisdom": [
+            "Dynamically balance exploration and exploitation through adaptive candidate selection and lookahead evaluation.",
+            "Dynamically adjust exploration-exploitation trade-offs based on the stage of the optimization process to efficiently navigate the solution space.",
+            "Leverage global cost estimation techniques, such as MST-based heuristics, to guide local decision-making and improve overall solution quality."
+        ],
+        "meta_guidance": null
+    },
+    {
+        "generation": 3,
+        "timestamp": 1748448522.283193,
+        "best_fitness": 5.93691,
+        "diversity": 1.0,
+        "current_wisdom_count": 26,
+        "recent_wisdom": [
+            "Dynamically adjust exploration-exploitation trade-offs based on the stage of the optimization process to enhance both search diversity and convergence efficiency.",
+            "Dynamically balance exploration and exploitation by adjusting decision weights based on the stage of the optimization process.",
+            "Dynamically adjust algorithm parameters based on problem feedback to balance exploration and exploitation."
+        ],
+        "meta_guidance": null
+    },
+    {
+        "generation": 4,
+        "timestamp": 1748448746.60559,
+        "best_fitness": 5.88688,
+        "diversity": 1.0,
+        "current_wisdom_count": 28,
+        "recent_wisdom": [
+            "Dynamically adjust algorithm parameters based on problem feedback to balance exploration and exploitation.",
+            "Integrate adaptive filtering and scoring mechanisms to dynamically adjust decision-making based on evolving problem patterns and constraints.",
+            "Leverage hierarchical or dual-phase heuristics to balance exploration of global solution spaces with exploitation of local refinements."
+        ],
+        "meta_guidance": null
+    },
+    {
+        "generation": 5,
+        "timestamp": 1748448965.161234,
+        "best_fitness": 5.88688,
+        "diversity": 0.8333333333333334,
+        "current_wisdom_count": 30,
+        "recent_wisdom": [
+            "Use clustering or grouping strategies to reduce computational complexity while preserving solution quality in combinatorial optimization.",
+            "Integrate dual-phase heuristics with clustering to dynamically refine solution exploration and enhance global optimality.",
+            "Leverage adaptive scoring functions that adjust based on pattern recognition to balance exploitation and exploration effectively."
+        ],
+        "meta_guidance": null
+    },
+    {
+        "generation": 6,
+        "timestamp": 1748449205.768354,
+        "best_fitness": 5.88688,
+        "diversity": 1.0,
+        "current_wisdom_count": 30,
+        "recent_wisdom": [
+            "Use dynamic weighting and pattern recognition to adaptively refine decision-making based on evolving problem structures.",
+            "Leverage clustering and heuristic-based partitioning to balance exploration of global structure with efficient local exploitation.",
+            "Integrate adaptive filtering and scoring mechanisms to dynamically balance exploration of global optimality with exploitation of local opportunities."
+        ],
+        "meta_guidance": null
+    },
+    {
+        "generation": 7,
+        "timestamp": 1748449498.0270562,
+        "best_fitness": 5.88688,
+        "diversity": 1.0,
+        "current_wisdom_count": 30,
+        "recent_wisdom": [
+            "Leverage hierarchical or dual-phase strategies to combine coarse-grained global guidance with fine-grained local refinements for efficient decision-making.",
+            "Integrate global structure guidance (e.g., MST heuristics) with local exploitation strategies to iteratively refine solutions while maintaining overall optimality.",
+            "Use adaptive scoring or filtering mechanisms that dynamically adjust based on observed patterns or problem-specific features to enhance decision precision."
+        ],
+        "meta_guidance": null
+    },
+    {
+        "generation": 8,
+        "timestamp": 1748449918.376737,
+        "best_fitness": 5.86873,
+        "diversity": 1.0,
+        "current_wisdom_count": 30,
+        "recent_wisdom": [
+            "Leverage dynamic, data-driven adjustments (e.g., pattern recognition or clustering) to guide the selection process and adapt to instance-specific characteristics.",
+            "Dynamically adapt decision-making processes by integrating feedback-driven scoring to balance exploration and exploitation effectively.",
+            "Leverage hierarchical structures, such as clustering, to modularize and refine solution spaces for improved scalability and precision."
+        ],
+        "meta_guidance": null
+    }
+]

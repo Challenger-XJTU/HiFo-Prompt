@@ -1,0 +1,17 @@
+{
+     "algorithm": "The algorithm integrates adaptive neighborhood sampling with dynamic pattern mining to update the execution time matrix using machine-guided perturbation zones while selecting jobs for perturbation based on learned criticality scores from execution trends.",
+     "code": "import numpy as np\nfrom sklearn.decomposition import NMF\n\ndef get_matrix_and_jobs(current_sequence, time_matrix, m, n):\n    def calculate_makespan(sequence, matrix, m):\n        machine_times = [0] * m\n        for job in sequence:\n            for machine in range(m):\n                if machine == 0:\n                    machine_times[machine] += matrix[job, machine]\n                else:\n                    machine_times[machine] = max(machine_times[machine], machine_times[machine - 1]) + matrix[job, machine]\n        return max(machine_times)\n    \n    def mine_execution_patterns(matrix, n_components=3):\n        model = NMF(n_components=n_components, init='random', random_state=42)\n        W = model.fit_transform(matrix)\n        H = model.components_\n        reconstructed_matrix = np.dot(W, H)\n        pattern_scores = np.sum((matrix - reconstructed_matrix)**2, axis=1)\n        return pattern_scores\n    \n    def update_time_matrix(matrix, patterns, n):\n        new_matrix = matrix.copy()\n        top_pattern_jobs = np.argsort(-patterns)[:n//3]\n        for job in top_pattern_jobs:\n            noise = np.random.normal(0, 0.1, size=m)  # Gaussian perturbation\n            new_matrix[job, :] = np.maximum(new_matrix[job, :] + noise * new_matrix[job, :], 0)\n        return new_matrix\n    \n    def select_perturb_jobs(matrix, patterns, n):\n        perturb_scores = patterns ** 1.5  # Non-linear emphasis on pattern-based criticality\n        perturb_jobs = np.argsort(-perturb_scores)[:n//2]\n        return perturb_jobs\n    \n    # Step 1: Calculate current makespan\n    current_makespan = calculate_makespan(current_sequence, time_matrix, m)\n    \n    # Step 2: Mine execution patterns using non-negative matrix factorization\n    pattern_scores = mine_execution_patterns(time_matrix)\n    \n    # Step 3: Update execution time matrix using pattern-guided perturbation\n    new_matrix = update_time_matrix(time_matrix, pattern_scores, n)\n    \n    # Step 4: Select top jobs to perturb based on learned criticality scores\n    perturb_jobs = select_perturb_jobs(new_matrix, pattern_scores, n)\n    \n    return new_matrix, perturb_jobs",
+     "objective": 3482.0,
+     "other_inf": null,
+     "metadata": {
+          "operator": "e2",
+          "wisdom_tips": [
+               "Combine local search enhancements with adaptive perturbation strategies to escape local optima while maintaining focus on global objectives.",
+               "Design adaptive hybrid meta-heuristics synergistically fusing multiple search paradigms and dynamically tune operator parameters based on search stage or problem features",
+               "Employ machine learning or pattern recognition to mine deep problem structures and optimal solution patterns then use learned insights to intelligently bias towards promising search regions or constructive choices"
+          ],
+          "attention_focus": "experimenting with hybrid strategy combinations",
+          "generation_tendency": "focus_exploration",
+          "timestamp": 1757947392.348619
+     }
+}

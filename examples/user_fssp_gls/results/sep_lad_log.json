@@ -1,0 +1,106 @@
+[
+    {
+        "generation": 1,
+        "timestamp": 1757946073.280759,
+        "best_fitness": 3483.0,
+        "diversity": 1.0,
+        "current_wisdom_count": 10,
+        "recent_wisdom": [
+            "Leverage adaptive perturbation and neighborhood search strategies to escape local optima while maintaining a focus on balancing multiple objectives.",
+            "Combine machine learning-driven guidance with dynamic weighting of objectives to adaptively refine decision-making and enhance solution quality.",
+            "Integrate local search enhancements with global optimization strategies to escape local optima while preserving solution feasibility and efficiency."
+        ],
+        "meta_guidance": null
+    },
+    {
+        "generation": 2,
+        "timestamp": 1757947052.792504,
+        "best_fitness": 3483.0,
+        "diversity": 1.0,
+        "current_wisdom_count": 11,
+        "recent_wisdom": [
+            "Combine machine learning-driven guidance with dynamic weighting of objectives to adaptively refine decision-making and enhance solution quality.",
+            "Integrate local search enhancements with global optimization strategies to escape local optima while preserving solution feasibility and efficiency.",
+            "Combine machine learning-driven guidance with dynamic weighting of objectives to adaptively refine solution quality and balance competing goals in real-time."
+        ],
+        "meta_guidance": null
+    },
+    {
+        "generation": 3,
+        "timestamp": 1757948174.458484,
+        "best_fitness": 3482.0,
+        "diversity": 1.0,
+        "current_wisdom_count": 18,
+        "recent_wisdom": [
+            "Combine global objective alignment with localized perturbations to escape local optima while preserving solution quality.",
+            "Integrate adaptive perturbation with learned criticality metrics to dynamically guide decision-making and enhance solution quality.",
+            "Combine machine learning-driven prioritization with local search strategies to balance exploration and exploitation effectively."
+        ],
+        "meta_guidance": null
+    },
+    {
+        "generation": 4,
+        "timestamp": 1757949253.520819,
+        "best_fitness": 3482.0,
+        "diversity": 1.0,
+        "current_wisdom_count": 23,
+        "recent_wisdom": [
+            "Combine machine learning guidance with traditional optimization techniques to escape local optima and improve exploration efficiency.",
+            "Integrate adaptive sampling and dynamic learning to refine decision-making under uncertainty.",
+            "Integrate machine-guided perturbations with dynamic pattern mining to balance exploration and exploitation in solution refinement."
+        ],
+        "meta_guidance": null
+    },
+    {
+        "generation": 5,
+        "timestamp": 1757950306.110454,
+        "best_fitness": 3478.33333,
+        "diversity": 1.0,
+        "current_wisdom_count": 27,
+        "recent_wisdom": [
+            "Combine adaptive prioritization, dynamic weighting, and local search enhancement to escape local optima while preserving solution quality.",
+            "Integrate machine learning to dynamically prioritize decisions and adaptively perturb solutions, enhancing both exploration and exploitation.",
+            "Combine local search enhancement with dynamic objective weighting to escape local optima and improve solution quality iteratively."
+        ],
+        "meta_guidance": null
+    },
+    {
+        "generation": 6,
+        "timestamp": 1757951384.923091,
+        "best_fitness": 3474.66667,
+        "diversity": 0.8928571428571429,
+        "current_wisdom_count": 30,
+        "recent_wisdom": [
+            "Use perturbation strategies that selectively modify problem parameters to explore high-impact changes while preserving solution stability.",
+            "Identify and prioritize critical components that contribute most to the objective function, enabling efficient exploration of the solution space.",
+            "Use perturbation strategies to iteratively refine solutions while preserving the ability to escape local optima."
+        ],
+        "meta_guidance": null
+    },
+    {
+        "generation": 7,
+        "timestamp": 1757952359.738174,
+        "best_fitness": 3474.66667,
+        "diversity": 0.6428571428571429,
+        "current_wisdom_count": 30,
+        "recent_wisdom": [
+            "Use perturbation strategies that selectively modify key components of the current solution to balance exploitation and exploration effectively.",
+            "Identify and prioritize critical components that disproportionately influence the objective function, enabling focused optimization efforts.",
+            "Use perturbation strategies to explore alternative solutions while preserving the structural integrity of the current solution."
+        ],
+        "meta_guidance": null
+    },
+    {
+        "generation": 8,
+        "timestamp": 1757953407.91434,
+        "best_fitness": 3474.66667,
+        "diversity": 0.7857142857142857,
+        "current_wisdom_count": 30,
+        "recent_wisdom": [
+            "Use perturbation strategies to explore alternative solutions while preserving the structural integrity of the current solution.",
+            "Identify and prioritize elements with the highest impact on the objective function to guide efficient search and perturbation strategies.",
+            "Use incremental evaluation and localized modifications to preserve computational efficiency while exploring solution neighborhoods."
+        ],
+        "meta_guidance": null
+    }
+]

@@ -1,0 +1,17 @@
+{
+     "algorithm": "```",
+     "code": "import torch\n\ndef utility(train_x, train_y, best_x, best_y, test_x, mean_test_y, std_test_y, cost_test_y, budget_used, budget_total):\n    n_train, dim = train_x.shape\n    n_test = test_x.shape[0]\n    \n    # Compute normalized remaining budget\n    remaining_budget = (budget_total - budget_used) / budget_total\n    \n    # Simplified exploration term: directly scale by remaining budget\n    exploration_term = std_test_y * remaining_budget\n    \n    # Simplified exploitation term: focus on predicted mean and penalize distance to best solution\n    distance_to_best = torch.norm(test_x - best_x, dim=1)\n    exploitation_term = mean_test_y / (1 + distance_to_best)\n    \n    # Simplified cost penalty: emphasize cost efficiency as budget decreases\n    cost_penalty = cost_test_y * (1 - remaining_budget)\n    \n    # Combine terms into utility function with equal weighting\n    utility_value = exploitation_term + exploration_term - cost_penalty\n    \n    return utility_value",
+     "objective": 3.66957,
+     "other_inf": null,
+     "metadata": {
+          "operator": "m3",
+          "wisdom_tips": [
+               "Dynamically adjust the exploration-exploitation tradeoff by incorporating cost-aware budget allocation and historical performance feedback to optimize resource utilization.",
+               "Integrate adaptive objective transformations and diversification strategies to systematically target underexplored regions while maintaining a balance between search efficiency and solution quality.",
+               "Implement intelligent diversification and restart strategies based on solution feature space analysis systematically targeting uncovered feature regions to promote global search coverage and escape deep local optima"
+          ],
+          "attention_focus": "investigating alternative problem decomposition approaches",
+          "generation_tendency": "focus_exploration",
+          "timestamp": 1752308875.232694
+     }
+}

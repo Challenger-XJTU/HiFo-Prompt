@@ -1,0 +1,138 @@
+[
+     {
+          "algorithm": "A multi-scale adaptive fusion mechanism that integrates cost-penalized predictive gradients with spatially-weighted uncertainty modulation.",
+          "code": "import torch\n\ndef utility(train_x, train_y, best_x, best_y, test_x, mean_test_y, std_test_y, cost_test_y, budget_used, budget_total):\n    n_train = train_x.size(0)\n    n_test = test_x.size(0)\n\n    # Backbone idea: Hybrid cost-aware strategies balancing exploration-exploitation with dynamic resource sensitivity.\n\n    # New algorithm: {A multi-scale adaptive fusion mechanism that integrates cost-penalized predictive gradients with spatially-weighted uncertainty modulation.}\n\n    # Cost-penalized predictive gradients: emphasize high-reward regions while penalizing costly evaluations\n    predictive_gradient = (mean_test_y - torch.mean(train_y)) / (torch.std(train_y) + 1e-8)\n    cost_penalty = torch.log1p(cost_test_y / (torch.mean(cost_test_y) + 1e-8))\n    penalized_gradient = predictive_gradient / (cost_penalty + 1e-8)\n\n    # Spatially-weighted uncertainty modulation: scale uncertainty by proximity to evaluated points and budget constraints\n    knn_distances = torch.cdist(test_x, train_x)\n    avg_knn_distance = torch.mean(knn_distances, dim=1)\n    spatial_weight = torch.exp(-avg_knn_distance / (torch.max(avg_knn_distance) + 1e-8))\n    modulated_uncertainty = spatial_weight * std_test_y\n\n    # Multi-scale adaptive fusion: combine gradients and uncertainty with budget-driven scaling\n    remaining_budget_ratio = (budget_total - budget_used) / (budget_total + 1e-8)\n    adaptive_scale = 1.0 + remaining_budget_ratio * torch.rand(n_test, dtype=torch.float64)\n    utility_value = (\n        penalized_gradient * adaptive_scale +\n        modulated_uncertainty * (1.0 - remaining_budget_ratio)\n    )\n\n    return utility_value",
+          "objective": 2.08031,
+          "other_inf": null,
+          "metadata": {
+               "operator": "e2",
+               "wisdom_tips": [
+                    "Integrate cost-aware utility computations to guide resource allocation and enhance efficiency in combinatorial optimization problems.",
+                    "Integrate cost-awareness into utility computations to ensure efficient allocation of resources while pursuing high-reward solutions.",
+                    "Integrate cost-aware strategies that allocate resources efficiently while accounting for both predictive accuracy and variability in unobserved outcomes."
+               ],
+               "attention_focus": "experimenting with hybrid strategy combinations",
+               "generation_tendency": "focus_exploration",
+               "timestamp": 1752311733.502149
+          }
+     },
+     {
+          "algorithm": "```",
+          "code": "import torch\n\ndef utility(train_x, train_y, best_x, best_y, test_x, mean_test_y, std_test_y, cost_test_y, budget_used, budget_total):\n    n_train = train_x.size(0)\n    n_test = test_x.size(0)\n\n    # Simplified exploration: Compute average distance to training data\n    pairwise_distances = torch.cdist(test_x.unsqueeze(1), train_x.unsqueeze(0), p=2).squeeze(1)\n    avg_distance = torch.mean(pairwise_distances, dim=1)\n    max_distance = torch.max(torch.cdist(train_x, train_x)).item()\n    normalized_exploration = avg_distance / (max_distance + 1e-8)\n\n    # Simplified exploitation: Confidence bound with reduced complexity\n    confidence_bounds = mean_test_y + std_test_y\n\n    # Simplified cost-aware efficiency: Scale by inverse cost and remaining budget ratio\n    remaining_budget_ratio = (budget_total - budget_used) / (budget_total + 1e-8)\n    cost_efficiency = torch.exp(-cost_test_y) * remaining_budget_ratio\n\n    # Hybrid utility: Combine terms with static weights for simplicity\n    utility_value = (\n        0.5 * confidence_bounds +\n        0.3 * normalized_exploration +\n        0.2 * cost_efficiency\n    )\n\n    return utility_value",
+          "objective": 2.13095,
+          "other_inf": null,
+          "metadata": {
+               "operator": "m3",
+               "wisdom_tips": [
+                    "Incorporate cost-aware penalties that evolve with resource depletion to ensure efficient utilization of limited resources.",
+                    "Integrate cost-awareness into utility computations to ensure efficient allocation of resources while pursuing high-reward solutions.",
+                    "Integrate cost-aware strategies that allocate resources efficiently while accounting for both predictive accuracy and variability in unobserved outcomes."
+               ],
+               "attention_focus": "experimenting with hybrid strategy combinations",
+               "generation_tendency": "focus_exploration",
+               "timestamp": 1752310847.962682
+          }
+     },
+     {
+          "algorithm": "A novel algorithm that leverages stochastic cost-weighted potential fields and learns adaptive trust regions to balance exploration-exploitation while dynamically shaping the search space based on historical patterns and budget sensitivity.",
+          "code": "import torch\n\ndef utility(train_x, train_y, best_x, best_y, test_x, mean_test_y, std_test_y, cost_test_y, budget_used, budget_total):\n    n_train = train_x.size(0)\n    n_test = test_x.size(0)\n\n    # Stochastic cost-weighted potential field: penalize costly regions probabilistically\n    random_field_scale = torch.rand(n_test, dtype=torch.float64) * 0.8 + 0.2  # Random scaling between 0.2 and 1.0\n    cost_field = torch.log1p(cost_test_y / (torch.mean(cost_test_y) + 1e-8)) ** random_field_scale\n    reward_potential = mean_test_y / (cost_field + 1e-8)\n\n    # Adaptive trust region learning: bias towards high-confidence areas using historical density patterns\n    knn_distances = torch.cdist(test_x, train_x)\n    avg_knn_distance = torch.mean(knn_distances, dim=1)\n    trust_region_radius = torch.quantile(avg_knn_distance, 0.75)  # Learn a dynamic trust region radius\n    trust_weight = torch.exp(-avg_knn_distance / (trust_region_radius + 1e-8))\n\n    # Budget-sensitive exploration scaling: amplify exploration in early stages, suppress in later stages\n    remaining_budget_ratio = (budget_total - budget_used) / (budget_total + 1e-8)\n    exploration_amplifier = 1.0 + torch.rand(n_test, dtype=torch.float64) * remaining_budget_ratio\n    exploration_weight = (std_test_y ** 2) * exploration_amplifier\n\n    # Hybrid utility: combine potential field rewards, trust region guidance, and exploration scaling\n    utility_value = (\n        reward_potential * trust_weight +\n        exploration_weight * (1.0 - remaining_budget_ratio)\n    )\n\n    return utility_value",
+          "objective": 2.18492,
+          "other_inf": null,
+          "metadata": {
+               "operator": "e1",
+               "wisdom_tips": [
+                    "Incorporate cost-aware efficiency into decision-making by scaling choices based on resource constraints and instance-specific penalties to optimize resource utilization.",
+                    "Integrate exploration and exploitation dynamically by combining distance-based exploration with confidence-bound-driven exploitation to adaptively guide the search process.",
+                    "Employ machine learning or pattern recognition to mine deep problem structures and optimal solution patterns then use learned insights to intelligently bias towards promising search regions or constructive choices"
+               ],
+               "attention_focus": "introducing new randomization or adaptive mechanisms",
+               "generation_tendency": "focus_exploration",
+               "timestamp": 1752313147.818468
+          }
+     },
+     {
+          "algorithm": "A novel algorithm that integrates adaptive randomization and cost-aware geometric discounting to dynamically balance exploration-exploitation while amplifying uncertainty-driven exploration with cost-modulated sensitivity.",
+          "code": "import torch\n\ndef utility(train_x, train_y, best_x, best_y, test_x, mean_test_y, std_test_y, cost_test_y, budget_used, budget_total):\n    n_train = train_x.size(0)\n    n_test = test_x.size(0)\n\n    # Adaptive randomization factor for budget-aware exploration-exploitation tradeoff\n    remaining_budget_ratio = (budget_total - budget_used) / (budget_total + 1e-8)\n    adaptive_random_factor = torch.rand(n_test, dtype=torch.float64) ** (1.0 - remaining_budget_ratio)\n\n    # Cost-aware geometric discounting with dynamic sensitivity\n    avg_cost = torch.mean(cost_test_y)\n    cost_sensitivity = 2.0 * torch.rand(n_test, dtype=torch.float64) * remaining_budget_ratio\n    cost_discount = torch.exp(-cost_sensitivity * (cost_test_y / (avg_cost + 1e-8)))\n\n    # Distance-based probabilistic exploitation with adaptive scaling\n    dist_to_best = torch.norm(test_x - best_x, dim=1)\n    max_dist = torch.max(torch.cdist(train_x, train_x)).item()\n    normalized_dist = dist_to_best / (max_dist + 1e-8)\n    exploitation_prob = torch.sigmoid((1.0 - normalized_dist) * adaptive_random_factor)\n\n    # Uncertainty-driven exploration with cost-modulated amplification\n    knn_distances = torch.cdist(test_x, train_x)\n    avg_knn_distance = torch.mean(knn_distances, dim=1)\n    exploration_amplifier = torch.log1p(std_test_y / (avg_knn_distance + 1e-8)) * cost_discount\n\n    # Combine terms into the utility function with randomized adaptive weighting\n    utility_value = (\n        exploitation_prob * mean_test_y +\n        (1.0 - exploitation_prob) * exploration_amplifier -\n        (1.0 - cost_discount)\n    )\n\n    return utility_value",
+          "objective": 2.244,
+          "other_inf": null,
+          "metadata": {
+               "operator": "e2",
+               "wisdom_tips": [
+                    "Integrate cost-aware utility computations to guide resource allocation and enhance efficiency in combinatorial optimization problems.",
+                    "Integrate cost-awareness into utility computations to ensure efficient allocation of resources while pursuing high-reward solutions.",
+                    "Integrate cost-aware strategies that allocate resources efficiently while accounting for both predictive accuracy and variability in unobserved outcomes."
+               ],
+               "attention_focus": "introducing new randomization or adaptive mechanisms",
+               "generation_tendency": "focus_exploration",
+               "timestamp": 1752311783.104083
+          }
+     },
+     {
+          "algorithm": "A hybrid utility algorithm that combines cost-sensitive exploration with uncertainty-guided exploitation, while adaptively balancing resource allocation through a dynamic penalty-scaling mechanism.",
+          "code": "import torch\n\ndef utility(train_x, train_y, best_x, best_y, test_x, mean_test_y, std_test_y, cost_test_y, budget_used, budget_total):\n    n_train = train_x.size(0)\n    n_test = test_x.size(0)\n\n    # Dynamic penalty scaling based on remaining budget and cost variability\n    remaining_budget_ratio = (budget_total - budget_used) / (budget_total + 1e-8)\n    cost_variability = torch.std(cost_test_y) / (torch.mean(cost_test_y) + 1e-8)\n    cost_penalty_scale = 1.0 + remaining_budget_ratio * cost_variability\n    cost_penalty = torch.log1p(cost_test_y / (torch.mean(cost_test_y) + 1e-8)) ** cost_penalty_scale\n\n    # Uncertainty-guided exploitation with distance-aware weighting\n    dist_to_best = torch.norm(test_x - best_x, dim=1)\n    max_dist = torch.max(torch.cdist(train_x, train_x)).item()\n    normalized_dist = dist_to_best / (max_dist + 1e-8)\n    exploitation_weight = torch.exp(-normalized_dist) * (mean_test_y - best_y)\n\n    # Cost-sensitive exploration with adaptive sensitivity scaling\n    avg_knn_distance = torch.mean(torch.cdist(test_x, train_x), dim=1)\n    exploration_sensitivity = 1.0 + torch.rand(n_test, dtype=torch.float64) * remaining_budget_ratio\n    exploration_weight = std_test_y / (avg_knn_distance + 1e-8) ** exploration_sensitivity\n\n    # Hybrid strategy integration with randomized adaptive modulation\n    random_modulation = torch.rand(n_test, dtype=torch.float64) * remaining_budget_ratio\n    utility_value = (\n        (1.0 - random_modulation) * exploitation_weight +\n        random_modulation * exploration_weight -\n        cost_penalty\n    )\n\n    return utility_value",
+          "objective": 2.3243,
+          "other_inf": null,
+          "metadata": {
+               "operator": "m1",
+               "wisdom_tips": [
+                    "Integrate cost-awareness into utility computations to ensure efficient allocation of resources while pursuing high-reward solutions.",
+                    "Integrate cost-aware strategies that allocate resources efficiently while accounting for both predictive accuracy and variability in unobserved outcomes.",
+                    "Construct problem specialized efficient solution representations and co design dedicated core operators to fully leverage representation structure for powerful solution space exploration"
+               ],
+               "attention_focus": "experimenting with hybrid strategy combinations",
+               "generation_tendency": "focus_exploration",
+               "timestamp": 1752310098.805783
+          }
+     },
+     {
+          "algorithm": "A new algorithm that dynamically adjusts exploration-exploitation trade-offs using randomized sensitivity scaling and adaptive cost-aware penalties while integrating normalized predictive uncertainty.",
+          "code": "import torch\n\ndef utility(train_x, train_y, best_x, best_y, test_x, mean_test_y, std_test_y, cost_test_y, budget_used, budget_total):\n    n_train = train_x.size(0)\n    n_test = test_x.size(0)\n\n    # Adaptive cost penalty with randomized scaling factor\n    remaining_budget_ratio = (budget_total - budget_used) / (budget_total + 1e-8)\n    random_scaling = torch.rand(n_test, dtype=torch.float64) * 0.5 + 0.5  # Randomized scaling between 0.5 and 1.0\n    cost_penalty = (cost_test_y / (torch.mean(cost_test_y) + 1e-8)) ** (random_scaling * (1.0 + remaining_budget_ratio))\n\n    # Distance-based exploitation with adaptive weight decay\n    dist_to_best = torch.norm(test_x - best_x, dim=1)\n    max_dist = torch.max(torch.cdist(train_x, train_x)).item()\n    normalized_dist = dist_to_best / (max_dist + 1e-8)\n    exploitation_weight = torch.exp(-normalized_dist ** 2) * (mean_test_y - best_y)\n\n    # Uncertainty-driven exploration with dynamic sensitivity adjustment\n    avg_knn_distance = torch.mean(torch.cdist(test_x, train_x), dim=1)\n    exploration_sensitivity = 1.5 + torch.rand(n_test, dtype=torch.float64) * remaining_budget_ratio  # Randomized sensitivity\n    exploration_weight = (std_test_y ** 2) / ((avg_knn_distance + 1e-8) ** exploration_sensitivity)\n\n    # Hybrid utility integration with emphasis on unobserved variability\n    utility_value = exploitation_weight + remaining_budget_ratio * exploration_weight - cost_penalty\n\n    return utility_value",
+          "objective": 2.32487,
+          "other_inf": null,
+          "metadata": {
+               "operator": "m2",
+               "wisdom_tips": [
+                    "Integrate cost-awareness into utility computations to ensure efficient allocation of resources while pursuing high-reward solutions.",
+                    "Integrate cost-aware strategies that allocate resources efficiently while accounting for both predictive accuracy and variability in unobserved outcomes.",
+                    "Design adaptive hybrid meta-heuristics synergistically fusing multiple search paradigms and dynamically tune operator parameters based on search stage or problem features"
+               ],
+               "attention_focus": "introducing new randomization or adaptive mechanisms",
+               "generation_tendency": "focus_exploration",
+               "timestamp": 1752312419.827712
+          }
+     },
+     {
+          "algorithm": "```",
+          "code": "import torch\n\ndef utility(train_x, train_y, best_x, best_y, test_x, mean_test_y, std_test_y, cost_test_y, budget_used, budget_total):\n    n_train = train_x.size(0)\n    n_test = test_x.size(0)\n\n    # Simplified dynamic penalty scaling based on remaining budget\n    remaining_budget_ratio = (budget_total - budget_used) / (budget_total + 1e-8)\n    cost_penalty = torch.log1p(cost_test_y) * remaining_budget_ratio\n\n    # Simplified uncertainty-guided exploitation with normalized distance\n    dist_to_best = torch.norm(test_x - best_x, dim=1)\n    max_dist = torch.max(torch.cdist(train_x, train_x)).item()\n    normalized_dist = dist_to_best / (max_dist + 1e-8)\n    exploitation_weight = torch.exp(-normalized_dist) * (mean_test_y - best_y)\n\n    # Simplified cost-sensitive exploration with adaptive sensitivity\n    avg_knn_distance = torch.mean(torch.cdist(test_x, train_x), dim=1)\n    exploration_weight = std_test_y / (avg_knn_distance + 1e-8)\n\n    # Simplified hybrid strategy integration with randomization\n    utility_value = exploitation_weight + remaining_budget_ratio * exploration_weight - cost_penalty\n    utility_value += torch.randn(n_test, dtype=torch.float64) * 0.1 * remaining_budget_ratio\n\n    return utility_value",
+          "objective": 2.34664,
+          "other_inf": null,
+          "metadata": {
+               "operator": "m3",
+               "wisdom_tips": [
+                    "Dynamically adjust the exploration-exploitation tradeoff by incorporating cost-aware budget allocation and historical performance feedback to optimize resource utilization.",
+                    "Integrate adaptive objective transformations and diversification strategies to systematically target underexplored regions while maintaining a balance between search efficiency and solution quality.",
+                    "Integrate exploration and exploitation dynamically by combining distance-based exploration with confidence-bound-driven exploitation to adaptively guide the search process."
+               ],
+               "attention_focus": "introducing new randomization or adaptive mechanisms",
+               "generation_tendency": "focus_exploration",
+               "timestamp": 1752312816.112597
+          }
+     },
+     {
+          "algorithm": "```",
+          "code": "import torch\n\ndef utility(train_x, train_y, best_x, best_y, test_x, mean_test_y, std_test_y, cost_test_y, budget_used, budget_total):\n    n_train = train_x.size(0)\n    n_test = test_x.size(0)\n\n    # Simplified dynamic penalty scaling based on remaining budget\n    remaining_budget_ratio = (budget_total - budget_used) / (budget_total + 1e-8)\n    cost_penalty = torch.log1p(cost_test_y / (torch.mean(cost_test_y) + 1e-8)) ** (1.0 + remaining_budget_ratio)\n\n    # Simplified uncertainty-guided exploitation with normalized distance\n    dist_to_best = torch.norm(test_x - best_x, dim=1)\n    max_dist = torch.max(torch.cdist(train_x, train_x)).item()\n    normalized_dist = dist_to_best / (max_dist + 1e-8)\n    exploitation_weight = torch.exp(-normalized_dist) * (mean_test_y - best_y)\n\n    # Simplified cost-sensitive exploration with adaptive sensitivity\n    avg_knn_distance = torch.mean(torch.cdist(test_x, train_x), dim=1)\n    exploration_sensitivity = 1.0 + remaining_budget_ratio\n    exploration_weight = std_test_y / (avg_knn_distance + 1e-8) ** exploration_sensitivity\n\n    # Simplified hybrid strategy integration\n    utility_value = exploitation_weight + remaining_budget_ratio * exploration_weight - cost_penalty\n\n    return utility_value",
+          "objective": 2.54366,
+          "other_inf": null,
+          "metadata": {
+               "operator": "m3",
+               "wisdom_tips": [
+                    "Dynamically modulate exploration-exploitation trade-offs using uncertainty-guided and cost-sensitive strategies to enhance solution quality and efficiency.",
+                    "Integrate adaptive resource allocation mechanisms that scale based on problem-specific feedback to optimize performance across diverse instances.",
+                    "Dynamically modulate the exploration-exploitation tradeoff based on resource constraints and problem uncertainty to enhance decision robustness."
+               ],
+               "attention_focus": "improving precision of existing heuristics and rules",
+               "generation_tendency": "focus_exploitation",
+               "timestamp": 1752310666.1597
+          }
+     }
+]

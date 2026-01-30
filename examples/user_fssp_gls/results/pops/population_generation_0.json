@@ -1,0 +1,138 @@
+[
+     {
+          "algorithm": "A hybrid algorithm adaptively perturbs jobs and updates the execution time matrix by combining machine learning-driven job prioritization, dynamic objective weighting, and local search enhancement to escape local optima and minimize makespan.",
+          "code": "import numpy as np\n\ndef get_matrix_and_jobs(current_sequence, time_matrix, m, n):\n    def calculate_makespan(sequence, matrix, m):\n        machine_times = [0] * m\n        for job in sequence:\n            machine_times[0] += matrix[job][0]\n            for i in range(1, m):\n                machine_times[i] = max(machine_times[i], machine_times[i-1]) + matrix[job][i]\n        return machine_times[-1]\n\n    # Calculate current makespan\n    current_makespan = calculate_makespan(current_sequence, time_matrix, m)\n\n    # Perturb jobs using a hybrid approach\n    perturb_jobs = []\n    new_matrix = time_matrix.copy()\n\n    # Step 1: Identify critical jobs contributing most to makespan\n    job_contributions = []\n    for job in current_sequence:\n        temp_sequence = current_sequence.copy()\n        temp_sequence.remove(job)\n        reduced_makespan = calculate_makespan(temp_sequence, time_matrix, m)\n        contribution = current_makespan - reduced_makespan\n        job_contributions.append((job, contribution))\n    \n    # Sort jobs by their contribution (descending order)\n    job_contributions.sort(key=lambda x: x[1], reverse=True)\n    perturb_jobs = [job for job, _ in job_contributions[:max(1, n // 4)]]\n\n    # Step 2: Dynamically adjust execution times for perturbed jobs\n    for job in perturb_jobs:\n        for machine in range(m):\n            new_matrix[job][machine] *= np.random.uniform(0.9, 1.1)  # Slight perturbation\n\n    # Step 3: Introduce auxiliary objectives to reshape search landscape\n    # Example: Penalize high variance in machine loads\n    machine_loads = [sum(time_matrix[job][i] for job in current_sequence) for i in range(m)]\n    load_variance = np.var(machine_loads)\n    if load_variance > np.mean(machine_loads):  # High variance detected\n        for job in perturb_jobs:\n            for machine in range(m):\n                new_matrix[job][machine] *= np.random.uniform(0.85, 1.15)  # Stronger perturbation\n\n    return new_matrix, perturb_jobs",
+          "objective": 3483.0,
+          "other_inf": null,
+          "metadata": {
+               "operator": "i1",
+               "wisdom_tips": [
+                    "Design adaptive hybrid meta-heuristics synergistically fusing multiple search paradigms and dynamically tune operator parameters based on search stage or problem features",
+                    "Employ machine learning or pattern recognition to mine deep problem structures and optimal solution patterns then use learned insights to intelligently bias towards promising search regions or constructive choices",
+                    "Explore objective function engineering by introducing auxiliary or surrogate objectives or by dynamically adjusting weights to reshape the search landscape aiding escape from local optima or guiding diverse exploration"
+               ],
+               "attention_focus": "improving algorithm robustness across different problem instances",
+               "generation_tendency": "balanced_search",
+               "timestamp": 1757944831.997516
+          }
+     },
+     {
+          "algorithm": "The algorithm adaptively updates the execution time matrix using a hybrid meta-heuristic that combines machine learning-based pattern recognition to identify critical jobs and dynamically adjusts job perturbations based on long-term impact analysis to minimize makespan.",
+          "code": "import numpy as np\n\ndef get_matrix_and_jobs(current_sequence, time_matrix, m, n):\n    # Calculate current makespan\n    def calculate_makespan(sequence, matrix, m):\n        machine_times = [0] * m\n        for job in sequence:\n            for machine in range(m):\n                if machine == 0:\n                    machine_times[machine] += matrix[job, machine]\n                else:\n                    machine_times[machine] = max(machine_times[machine], machine_times[machine - 1]) + matrix[job, machine]\n        return max(machine_times)\n    \n    # Identify critical jobs using pattern recognition (e.g., longest processing times)\n    def identify_critical_jobs(matrix, n, m):\n        job_scores = np.sum(matrix, axis=1)  # Sum of execution times across machines\n        critical_jobs = np.argsort(job_scores)[-n//2:]  # Top half jobs with highest scores\n        return critical_jobs\n    \n    # Perturb execution times for critical jobs to explore new search regions\n    def update_time_matrix(matrix, critical_jobs):\n        new_matrix = matrix.copy()\n        for job in critical_jobs:\n            perturbation = np.random.uniform(0.9, 1.1, size=m)  # Small random perturbation\n            new_matrix[job, :] *= perturbation\n        return new_matrix\n    \n    # Main logic\n    current_makespan = calculate_makespan(current_sequence, time_matrix, m)\n    critical_jobs = identify_critical_jobs(time_matrix, n, m)\n    new_matrix = update_time_matrix(time_matrix, critical_jobs)\n    \n    # Select top jobs to perturb based on long-term impact\n    perturb_jobs = critical_jobs[np.argsort(-np.sum(new_matrix[critical_jobs, :], axis=1))[:len(critical_jobs)//2]]\n    \n    return new_matrix, perturb_jobs",
+          "objective": 3493.33333,
+          "other_inf": null,
+          "metadata": {
+               "operator": "i1",
+               "wisdom_tips": [
+                    "Design adaptive hybrid meta-heuristics synergistically fusing multiple search paradigms and dynamically tune operator parameters based on search stage or problem features",
+                    "Employ machine learning or pattern recognition to mine deep problem structures and optimal solution patterns then use learned insights to intelligently bias towards promising search regions or constructive choices",
+                    "Explore objective function engineering by introducing auxiliary or surrogate objectives or by dynamically adjusting weights to reshape the search landscape aiding escape from local optima or guiding diverse exploration"
+               ],
+               "attention_focus": "considering long-term impact of current decisions",
+               "generation_tendency": "balanced_search",
+               "timestamp": 1757944612.2305
+          }
+     },
+     {
+          "algorithm": "The algorithm adaptively updates the execution time matrix using a hybrid meta-heuristic that combines machine learning-based pattern recognition with dynamic objective function engineering to identify and perturb top jobs, ensuring robustness across problem instances.",
+          "code": "import numpy as np\n\ndef get_matrix_and_jobs(current_sequence, time_matrix, m, n):\n    # Step 1: Compute job importance scores based on current sequence and makespan contribution\n    def compute_importance_scores(sequence, matrix, m):\n        completion_times = np.zeros(m)\n        scores = np.zeros(len(sequence))\n        for job in sequence:\n            completion_times[0] += matrix[job, 0]\n            for machine in range(1, m):\n                completion_times[machine] = max(completion_times[machine], completion_times[machine - 1]) + matrix[job, machine]\n            scores[job] = completion_times[-1]  # Contribution to makespan\n        return scores\n\n    importance_scores = compute_importance_scores(current_sequence, time_matrix, m)\n\n    # Step 2: Use k-means clustering to group jobs into clusters based on their scores\n    from sklearn.cluster import KMeans\n    kmeans = KMeans(n_clusters=min(3, n), random_state=42).fit(importance_scores.reshape(-1, 1))\n    labels = kmeans.labels_\n\n    # Step 3: Identify top jobs to perturb (those in the highest-importance cluster)\n    perturb_jobs = np.where(labels == np.argmax(kmeans.cluster_centers_))[0]\n\n    # Step 4: Update the time matrix by introducing perturbations to break symmetry\n    new_matrix = time_matrix.copy()\n    perturbation_factor = 0.1  # Small perturbation to avoid drastic changes\n    for job in perturb_jobs:\n        noise = np.random.uniform(-perturbation_factor, perturbation_factor, size=m)\n        new_matrix[job, :] += noise * new_matrix[job, :]\n\n    return new_matrix, perturb_jobs",
+          "objective": 3495.0,
+          "other_inf": null,
+          "metadata": {
+               "operator": "i1",
+               "wisdom_tips": [
+                    "Design adaptive hybrid meta-heuristics synergistically fusing multiple search paradigms and dynamically tune operator parameters based on search stage or problem features",
+                    "Employ machine learning or pattern recognition to mine deep problem structures and optimal solution patterns then use learned insights to intelligently bias towards promising search regions or constructive choices",
+                    "Explore objective function engineering by introducing auxiliary or surrogate objectives or by dynamically adjusting weights to reshape the search landscape aiding escape from local optima or guiding diverse exploration"
+               ],
+               "attention_focus": "improving algorithm robustness across different problem instances",
+               "generation_tendency": "balanced_search",
+               "timestamp": 1757944701.226507
+          }
+     },
+     {
+          "algorithm": "Design an adaptive hybrid algorithm that dynamically updates the execution time matrix using surrogate objectives, mines patterns to identify critical jobs for perturbation, and employs a stochastic local search mechanism to escape local optima while ensuring robustness across diverse problem instances.",
+          "code": "import numpy as np\n\ndef get_matrix_and_jobs(current_sequence, time_matrix, m, n):\n    def calculate_makespan(sequence, matrix, m):\n        machine_times = [0] * m\n        for job in sequence:\n            machine_times[0] += matrix[job][0]\n            for i in range(1, m):\n                machine_times[i] = max(machine_times[i], machine_times[i-1]) + matrix[job][i]\n        return max(machine_times)\n    \n    # Step 1: Calculate current makespan\n    current_makespan = calculate_makespan(current_sequence, time_matrix, m)\n    \n    # Step 2: Generate surrogate objective values (e.g., deviation from mean execution time)\n    mean_times = np.mean(time_matrix, axis=1)\n    surrogate_values = np.abs(time_matrix - mean_times[:, np.newaxis])\n    surrogate_scores = np.sum(surrogate_values, axis=1)\n    \n    # Step 3: Identify top jobs contributing most to surrogate scores\n    perturb_jobs = np.argsort(-surrogate_scores)[:n//2]  # Select top half jobs\n    \n    # Step 4: Update execution time matrix with perturbation bias\n    new_matrix = time_matrix.copy()\n    for job in perturb_jobs:\n        noise = np.random.uniform(-0.1, 0.1, size=m)  # Small random perturbation\n        new_matrix[job] += noise * time_matrix[job]  # Scale noise by original times\n    \n    # Ensure non-negative execution times\n    new_matrix = np.maximum(new_matrix, 0)\n    \n    return new_matrix, perturb_jobs",
+          "objective": 3499.66667,
+          "other_inf": null,
+          "metadata": {
+               "operator": "i1",
+               "wisdom_tips": [
+                    "Design adaptive hybrid meta-heuristics synergistically fusing multiple search paradigms and dynamically tune operator parameters based on search stage or problem features",
+                    "Employ machine learning or pattern recognition to mine deep problem structures and optimal solution patterns then use learned insights to intelligently bias towards promising search regions or constructive choices",
+                    "Explore objective function engineering by introducing auxiliary or surrogate objectives or by dynamically adjusting weights to reshape the search landscape aiding escape from local optima or guiding diverse exploration"
+               ],
+               "attention_focus": "improving algorithm robustness across different problem instances",
+               "generation_tendency": "balanced_search",
+               "timestamp": 1757944949.850445
+          }
+     },
+     {
+          "algorithm": "The algorithm adaptively hybridizes meta-heuristics with machine learning to dynamically update the execution time matrix, bias perturbation selection toward critical jobs using structural patterns, and reshape the search landscape via auxiliary objectives for robust minimization of makespan.",
+          "code": "import numpy as np\n\ndef get_matrix_and_jobs(current_sequence, time_matrix, m, n):\n    def calculate_makespan(sequence, matrix, m):\n        machine_times = [0] * m\n        for job in sequence:\n            machine_times[0] += matrix[job][0]\n            for i in range(1, m):\n                machine_times[i] = max(machine_times[i], machine_times[i-1]) + matrix[job][i]\n        return max(machine_times)\n    \n    def mine_critical_jobs(sequence, matrix, m):\n        job_impact = []\n        baseline_makespan = calculate_makespan(sequence, matrix, m)\n        for job in sequence:\n            temp_sequence = [j for j in sequence if j != job]\n            new_makespan = calculate_makespan(temp_sequence, matrix, m)\n            job_impact.append((job, baseline_makespan - new_makespan))\n        job_impact.sort(key=lambda x: x[1], reverse=True)\n        return [job for job, _ in job_impact[:max(1, n // 5)]]\n    \n    def update_matrix(matrix, sequence, critical_jobs):\n        updated_matrix = matrix.copy()\n        for job in critical_jobs:\n            for i in range(m):\n                updated_matrix[job][i] *= (1 + np.random.uniform(-0.1, 0.1))  # Small perturbation\n        return updated_matrix\n    \n    # Step 1: Mine critical jobs based on their impact on makespan\n    critical_jobs = mine_critical_jobs(current_sequence, time_matrix, m)\n    \n    # Step 2: Update the time matrix by perturbing execution times of critical jobs\n    new_matrix = update_matrix(time_matrix, current_sequence, critical_jobs)\n    \n    # Step 3: Select top jobs to perturb further\n    perturb_jobs = critical_jobs\n    \n    return new_matrix, perturb_jobs",
+          "objective": 3500.33333,
+          "other_inf": null,
+          "metadata": {
+               "operator": "i1",
+               "wisdom_tips": [
+                    "Design adaptive hybrid meta-heuristics synergistically fusing multiple search paradigms and dynamically tune operator parameters based on search stage or problem features",
+                    "Employ machine learning or pattern recognition to mine deep problem structures and optimal solution patterns then use learned insights to intelligently bias towards promising search regions or constructive choices",
+                    "Explore objective function engineering by introducing auxiliary or surrogate objectives or by dynamically adjusting weights to reshape the search landscape aiding escape from local optima or guiding diverse exploration"
+               ],
+               "attention_focus": "improving algorithm robustness across different problem instances",
+               "generation_tendency": "balanced_search",
+               "timestamp": 1757944630.030803
+          }
+     },
+     {
+          "algorithm": "The algorithm adaptively fuses meta-heuristics with machine learning to dynamically update the execution time matrix and identify top jobs for perturbation, leveraging problem structure insights and auxiliary objectives to escape local optima while ensuring robustness across diverse instances.",
+          "code": "import numpy as np\n\ndef get_matrix_and_jobs(current_sequence, time_matrix, m, n):\n    # Compute makespan for current sequence\n    def compute_makespan(sequence, matrix, m):\n        schedule = np.zeros(m)\n        for job in sequence:\n            schedule[0] += matrix[job, 0]\n            for i in range(1, m):\n                schedule[i] = max(schedule[i], schedule[i-1]) + matrix[job, i]\n        return max(schedule)\n    \n    # Perturb time matrix using adaptive noise based on job-machine sensitivity\n    def update_matrix(matrix, sequence, m, n):\n        new_matrix = matrix.copy()\n        sensitivities = np.std(matrix, axis=1)  # Sensitivity of each job\n        avg_sensitivity = np.mean(sensitivities)\n        for job in sequence:\n            if sensitivities[job] > avg_sensitivity:\n                noise = np.random.uniform(-0.1, 0.1, m) * matrix[job]\n                new_matrix[job] += noise\n        return np.clip(new_matrix, 0, None)\n    \n    # Identify top jobs to perturb using contribution to makespan\n    def select_perturb_jobs(sequence, matrix, m, k=3):\n        contributions = []\n        base_makespan = compute_makespan(sequence, matrix, m)\n        for job in sequence:\n            temp_seq = [j for j in sequence if j != job]\n            reduced_makespan = compute_makespan(temp_seq, matrix, m)\n            contributions.append(base_makespan - reduced_makespan)\n        top_jobs = np.argsort(contributions)[-k:]\n        return np.array([sequence[j] for j in top_jobs])\n    \n    # Main logic\n    new_matrix = update_matrix(time_matrix, current_sequence, m, n)\n    perturb_jobs = select_perturb_jobs(current_sequence, time_matrix, m)\n    return new_matrix, perturb_jobs",
+          "objective": 3501.66667,
+          "other_inf": null,
+          "metadata": {
+               "operator": "i1",
+               "wisdom_tips": [
+                    "Design adaptive hybrid meta-heuristics synergistically fusing multiple search paradigms and dynamically tune operator parameters based on search stage or problem features",
+                    "Employ machine learning or pattern recognition to mine deep problem structures and optimal solution patterns then use learned insights to intelligently bias towards promising search regions or constructive choices",
+                    "Explore objective function engineering by introducing auxiliary or surrogate objectives or by dynamically adjusting weights to reshape the search landscape aiding escape from local optima or guiding diverse exploration"
+               ],
+               "attention_focus": "improving algorithm robustness across different problem instances",
+               "generation_tendency": "balanced_search",
+               "timestamp": 1757944612.232713
+          }
+     },
+     {
+          "algorithm": "The algorithm adaptively hybridizes meta-heuristic search with machine learning to dynamically update the execution time matrix and identify top jobs for perturbation, leveraging problem feature patterns and auxiliary objectives to escape local optima while ensuring robustness.",
+          "code": "import numpy as np\n\ndef get_matrix_and_jobs(current_sequence, time_matrix, m, n):\n    def calculate_makespan(sequence, matrix, m):\n        machine_times = [0] * m\n        for job in sequence:\n            machine_times[0] += matrix[job, 0]\n            for i in range(1, m):\n                machine_times[i] = max(machine_times[i], machine_times[i-1]) + matrix[job, i]\n        return max(machine_times)\n    \n    def perturb_candidates(sequence, matrix, m, n):\n        makespan = calculate_makespan(sequence, matrix, m)\n        job_importance = []\n        for job in sequence:\n            temp_seq = sequence.copy()\n            temp_seq.remove(job)\n            temp_seq.append(job)  # Perturb job position\n            new_makespan = calculate_makespan(temp_seq, matrix, m)\n            importance = abs(new_makespan - makespan)\n            job_importance.append((job, importance))\n        job_importance.sort(key=lambda x: x[1], reverse=True)\n        return [job for job, _ in job_importance[:max(1, n // 10)]]\n    \n    def update_matrix(matrix, sequence, m, n):\n        new_matrix = matrix.copy()\n        for job in sequence:\n            for i in range(m):\n                noise = np.random.uniform(-0.1, 0.1) * matrix[job, i]\n                new_matrix[job, i] = max(1, matrix[job, i] + noise)\n        return new_matrix\n    \n    perturb_jobs = perturb_candidates(current_sequence, time_matrix, m, n)\n    new_matrix = update_matrix(time_matrix, current_sequence, m, n)\n    return new_matrix, perturb_jobs",
+          "objective": 3504.0,
+          "other_inf": null,
+          "metadata": {
+               "operator": "i1",
+               "wisdom_tips": [
+                    "Design adaptive hybrid meta-heuristics synergistically fusing multiple search paradigms and dynamically tune operator parameters based on search stage or problem features",
+                    "Employ machine learning or pattern recognition to mine deep problem structures and optimal solution patterns then use learned insights to intelligently bias towards promising search regions or constructive choices",
+                    "Explore objective function engineering by introducing auxiliary or surrogate objectives or by dynamically adjusting weights to reshape the search landscape aiding escape from local optima or guiding diverse exploration"
+               ],
+               "attention_focus": "improving algorithm robustness across different problem instances",
+               "generation_tendency": "balanced_search",
+               "timestamp": 1757944912.2576509
+          }
+     },
+     {
+          "algorithm": "The algorithm adaptively updates the execution time matrix using a hybrid meta-heuristic approach that integrates machine learning-based pattern recognition to identify critical jobs and dynamically adjusts job perturbations to escape local optima while minimizing makespan.",
+          "code": "import numpy as np\n\ndef get_matrix_and_jobs(current_sequence, time_matrix, m, n):\n    # Clone the time matrix to avoid modifying the original\n    new_matrix = time_matrix.copy()\n    \n    # Compute the current makespan based on the sequence\n    def calculate_makespan(sequence, matrix, m):\n        machine_times = [0] * m\n        for job in sequence:\n            machine_times[0] += matrix[job][0]\n            for i in range(1, m):\n                machine_times[i] = max(machine_times[i], machine_times[i-1]) + matrix[job][i]\n        return machine_times[-1]\n    \n    current_makespan = calculate_makespan(current_sequence, time_matrix, m)\n    \n    # Use machine learning-inspired scoring to rank jobs by their impact on makespan\n    job_scores = []\n    for job in range(n):\n        temp_sequence = current_sequence.copy()\n        temp_sequence.remove(job)\n        temp_sequence.append(job)  # Perturb job placement\n        perturbed_makespan = calculate_makespan(temp_sequence, time_matrix, m)\n        score = abs(perturbed_makespan - current_makespan)\n        job_scores.append((job, score))\n    \n    # Sort jobs by their scores in descending order\n    job_scores.sort(key=lambda x: x[1], reverse=True)\n    \n    # Select top jobs to perturb (top 20% or at least 1 job)\n    num_perturb = max(1, int(0.2 * n))\n    perturb_jobs = [job for job, _ in job_scores[:num_perturb]]\n    \n    # Update the time matrix adaptively by scaling execution times of perturb jobs\n    for job in perturb_jobs:\n        new_matrix[job] *= (1 + np.random.uniform(-0.1, 0.1))  # Small random scaling\n    \n    return new_matrix, perturb_jobs",
+          "objective": 3507.0,
+          "other_inf": null,
+          "metadata": {
+               "operator": "i1",
+               "wisdom_tips": [
+                    "Design adaptive hybrid meta-heuristics synergistically fusing multiple search paradigms and dynamically tune operator parameters based on search stage or problem features",
+                    "Employ machine learning or pattern recognition to mine deep problem structures and optimal solution patterns then use learned insights to intelligently bias towards promising search regions or constructive choices",
+                    "Explore objective function engineering by introducing auxiliary or surrogate objectives or by dynamically adjusting weights to reshape the search landscape aiding escape from local optima or guiding diverse exploration"
+               ],
+               "attention_focus": "improving algorithm robustness across different problem instances",
+               "generation_tendency": "balanced_search",
+               "timestamp": 1757944831.995255
+          }
+     }
+]

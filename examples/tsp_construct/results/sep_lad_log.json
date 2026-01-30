@@ -1,0 +1,210 @@
+[
+    {
+        "generation": 1,
+        "timestamp": 1758182163.248733,
+        "best_fitness": 6.18575,
+        "diversity": 1.0,
+        "current_wisdom_count": 15,
+        "recent_wisdom": [
+            "Leverage lightweight simulations and statistical evaluations to assess candidate decisions while maintaining computational efficiency and adaptability to problem-specific dynamics.",
+            "Integrate dynamic weighting of objectives to balance exploration and exploitation based on problem-solving progress.",
+            "Leverage hybrid meta-heuristics, combining structural insights (e.g., MST properties) with statistical evaluations (e.g., lightweight simulations) to guide decision-making robustly."
+        ],
+        "meta_guidance": null
+    },
+    {
+        "generation": 2,
+        "timestamp": 1758182573.060829,
+        "best_fitness": 6.07493,
+        "diversity": 1.0,
+        "current_wisdom_count": 23,
+        "recent_wisdom": [
+            "Dynamically balance exploration of new options and exploitation of known good choices through adaptive weighting and lookahead simulations.",
+            "Integrate incremental updates and dynamic weighting to efficiently evaluate candidate solutions while preserving adaptability to changing problem constraints.",
+            "Leverage hybrid strategies that combine complementary cost metrics (e.g., MST-based, look-ahead, trajectory-based) to balance exploration and exploitation in decision-making."
+        ],
+        "meta_guidance": null
+    },
+    {
+        "generation": 3,
+        "timestamp": 1758182944.8669171,
+        "best_fitness": 5.98521,
+        "diversity": 0.8928571428571429,
+        "current_wisdom_count": 30,
+        "recent_wisdom": [
+            "Use incremental greedy decisions to construct solutions while ensuring global constraints are preserved.",
+            "Combine greedy local decisions with global structural considerations to ensure both short-term efficiency and long-term solution coherence.",
+            "Use adaptive weighting and lookahead strategies to dynamically balance exploration and exploitation throughout the optimization process."
+        ],
+        "meta_guidance": null
+    },
+    {
+        "generation": 4,
+        "timestamp": 1758183296.8340201,
+        "best_fitness": 5.98521,
+        "diversity": 0.9642857142857143,
+        "current_wisdom_count": 30,
+        "recent_wisdom": [
+            "Use hybrid scoring functions that integrate multiple heuristic signals to balance exploration and exploitation dynamically.",
+            "Combine short-term heuristic evaluations with long-term structural considerations to guide decision-making effectively.",
+            "Dynamically adjust scoring mechanisms to balance exploration and exploitation throughout the optimization process."
+        ],
+        "meta_guidance": null
+    },
+    {
+        "generation": 5,
+        "timestamp": 1758183710.605532,
+        "best_fitness": 5.98521,
+        "diversity": 1.0,
+        "current_wisdom_count": 30,
+        "recent_wisdom": [
+            "Combine short-term heuristic evaluations with long-term structural considerations to guide decision-making effectively.",
+            "Dynamically adjust scoring mechanisms to balance exploration and exploitation throughout the optimization process.",
+            "Combine short-term cost minimization with long-term structural considerations to guide decision-making."
+        ],
+        "meta_guidance": null
+    },
+    {
+        "generation": 6,
+        "timestamp": 1758184056.5621052,
+        "best_fitness": 5.96144,
+        "diversity": 1.0,
+        "current_wisdom_count": 30,
+        "recent_wisdom": [
+            "Combine short-term, computationally efficient heuristics with long-term, structural evaluations to guide decision-making effectively.",
+            "Balance greedy local decisions with global coherence by incorporating lookahead evaluations and structural diversity to enhance solution robustness.",
+            "Use adaptive scoring mechanisms that dynamically weigh multiple factors, such as cost, clustering, and normalization, to guide decision-making effectively across varying problem instances."
+        ],
+        "meta_guidance": null
+    },
+    {
+        "generation": 7,
+        "timestamp": 1758184405.020223,
+        "best_fitness": 5.95819,
+        "diversity": 1.0,
+        "current_wisdom_count": 30,
+        "recent_wisdom": [
+            "Prune redundant computations by adaptively focusing on high-potential candidates based on normalized edge costs and cluster-aware scoring.",
+            "Dynamically balance exploration and exploitation by incorporating structural diversity and lookahead evaluations to guide decision-making while avoiding premature convergence.",
+            "Reduce computational overhead by adaptively pruning candidates based on normalized costs and focusing evaluations on a manageable subset of high-potential options."
+        ],
+        "meta_guidance": null
+    },
+    {
+        "generation": 8,
+        "timestamp": 1758185246.911123,
+        "best_fitness": 5.92681,
+        "diversity": 1.0,
+        "current_wisdom_count": 30,
+        "recent_wisdom": [
+            "Use normalized metrics and hybrid scoring mechanisms to ensure robustness against varying problem scales and complexities.",
+            "Integrate lookahead-based evaluations to balance exploration and exploitation, ensuring decisions are informed by both immediate costs and future trajectory impacts.",
+            "Use hybrid scoring mechanisms that combine multiple metrics (e.g., normalized costs, structural coherence, and momentum) to dynamically adapt to problem-specific trade-offs."
+        ],
+        "meta_guidance": null
+    },
+    {
+        "generation": 9,
+        "timestamp": 1758185792.170132,
+        "best_fitness": 5.88828,
+        "diversity": 1.0,
+        "current_wisdom_count": 30,
+        "recent_wisdom": [
+            "Use adaptive pruning strategies to focus computational resources on promising candidates while preserving diversity in the search space.",
+            "Balance short-term gains with long-term feasibility by integrating lookahead simulations and global structural coherence into decision scoring.",
+            "Dynamically adjust candidate selection thresholds based on problem instance characteristics to ensure both efficiency and adaptability."
+        ],
+        "meta_guidance": null
+    },
+    {
+        "generation": 10,
+        "timestamp": 1758186274.317142,
+        "best_fitness": 5.88828,
+        "diversity": 1.0,
+        "current_wisdom_count": 30,
+        "recent_wisdom": [
+            "Use adaptive scoring mechanisms that dynamically adjust thresholds and weights based on instance-specific properties like density or cost distributions.",
+            "Combine short-term decision-making with long-term structural considerations to ensure both immediate efficiency and global coherence.",
+            "Dynamically adapt selection criteria based on instance-specific metrics to enhance robustness and scalability across varying problem complexities."
+        ],
+        "meta_guidance": null
+    },
+    {
+        "generation": 11,
+        "timestamp": 1758186643.521842,
+        "best_fitness": 5.88828,
+        "diversity": 1.0,
+        "current_wisdom_count": 30,
+        "recent_wisdom": [
+            "Combine short-term decision-making with long-term structural coherence by integrating lookahead simulations and global cost metrics like MST fragments.",
+            "Dynamically adjust candidate selection thresholds and scoring weights to adapt to the problem's instance-specific characteristics and density.",
+            "Use dynamic pruning and adaptive scoring mechanisms to tailor algorithm behavior to the specific characteristics of the problem instance."
+        ],
+        "meta_guidance": null
+    },
+    {
+        "generation": 12,
+        "timestamp": 1758187006.455385,
+        "best_fitness": 5.88828,
+        "diversity": 1.0,
+        "current_wisdom_count": 30,
+        "recent_wisdom": [
+            "Dynamically adjust candidate selection thresholds based on instance-specific characteristics, such as density or cost distribution, to enhance adaptability and robustness.",
+            "Use adaptive scoring mechanisms that dynamically adjust thresholds and weights based on instance-specific characteristics, ensuring robustness across diverse problem landscapes.",
+            "Use dynamic, instance-specific thresholds for candidate pruning to enhance both efficiency and adaptability in combinatorial optimization."
+        ],
+        "meta_guidance": null
+    },
+    {
+        "generation": 13,
+        "timestamp": 1758187502.2783208,
+        "best_fitness": 5.88828,
+        "diversity": 1.0,
+        "current_wisdom_count": 30,
+        "recent_wisdom": [
+            "Use adaptive pruning thresholds based on instance-specific data to efficiently narrow the search space while preserving solution quality.",
+            "Integrate lookahead simulations and structural coherence metrics to guide decisions that balance immediate costs with long-term solution quality.",
+            "Combine lookahead simulations with structural coherence metrics to balance immediate decisions with long-term optimization potential."
+        ],
+        "meta_guidance": null
+    },
+    {
+        "generation": 14,
+        "timestamp": 1758187884.3405921,
+        "best_fitness": 5.88828,
+        "diversity": 1.0,
+        "current_wisdom_count": 30,
+        "recent_wisdom": [
+            "Combine lookahead simulations with structural coherence metrics to balance immediate decisions with long-term optimization potential.",
+            "Combine lookahead simulations with global structural coherence metrics to guide decision-making in a way that balances immediate and long-term optimization goals.",
+            "Use dynamic, instance-specific thresholds for candidate pruning to enhance adaptability and computational efficiency."
+        ],
+        "meta_guidance": null
+    },
+    {
+        "generation": 15,
+        "timestamp": 1758188336.851648,
+        "best_fitness": 5.88828,
+        "diversity": 1.0,
+        "current_wisdom_count": 30,
+        "recent_wisdom": [
+            "Use dynamic, instance-specific thresholds for candidate pruning to enhance adaptability and computational efficiency.",
+            "Use adaptive thresholds and pruning strategies to dynamically focus computational resources on promising candidates based on instance-specific properties.",
+            "Integrate lookahead simulations with global structural metrics to guide decision-making toward both immediate and long-term optimization goals."
+        ],
+        "meta_guidance": null
+    },
+    {
+        "generation": 16,
+        "timestamp": 1758188801.048088,
+        "best_fitness": 5.88828,
+        "diversity": 1.0,
+        "current_wisdom_count": 30,
+        "recent_wisdom": [
+            "Combine short-term lookahead simulations with long-term structural coherence metrics to guide decision-making in combinatorial optimization problems.",
+            "Use adaptive pruning strategies to dynamically filter candidate solutions based on instance-specific thresholds, ensuring both efficiency and solution quality.",
+            "Use adaptive thresholds and hybrid scoring mechanisms to dynamically adjust candidate selection based on instance-specific data and evolving solution states."
+        ],
+        "meta_guidance": null
+    }
+]

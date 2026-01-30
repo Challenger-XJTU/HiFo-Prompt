@@ -1,0 +1,138 @@
+[
+     {
+          "algorithm": "Design an adaptive penalty-based heuristic that dynamically adjusts edge distances using a hybrid approach combining local optima escape strategies, frequency-based penalization, and machine learning-inspired biases to reshape the search landscape.",
+          "code": "import numpy as np\n\ndef update_edge_distance(edge_distance, local_opt_tour, edge_n_used):\n    num_nodes = edge_distance.shape[0]\n    updated_edge_distance = edge_distance.copy()\n    \n    # Parameter initialization\n    base_penalty = 1.0\n    scaling_factor = 0.5\n    freq_penalty_weight = 0.2\n    ml_bias_weight = 0.3\n    \n    # Compute penalties based on local optimal tour\n    for i in range(len(local_opt_tour) - 1):\n        u, v = local_opt_tour[i], local_opt_tour[i + 1]\n        updated_edge_distance[u, v] += base_penalty * (1 + scaling_factor * edge_n_used[u, v])\n        updated_edge_distance[v, u] = updated_edge_distance[u, v]\n    \n    # Add frequency-based penalization\n    freq_penalty = freq_penalty_weight * (edge_n_used / (np.max(edge_n_used) + 1e-8))\n    updated_edge_distance += freq_penalty\n    \n    # Introduce machine learning-inspired bias\n    ml_bias = ml_bias_weight * np.random.normal(0, 1, (num_nodes, num_nodes))\n    ml_bias = np.abs(ml_bias)  # Ensure non-negative adjustments\n    updated_edge_distance += ml_bias\n    \n    # Ensure no negative distances\n    updated_edge_distance = np.maximum(updated_edge_distance, 0)\n    \n    return updated_edge_distance",
+          "objective": 1.36212,
+          "other_inf": null,
+          "metadata": {
+               "operator": "i1",
+               "wisdom_tips": [
+                    "Design adaptive hybrid meta-heuristics synergistically fusing multiple search paradigms and dynamically tune operator parameters based on search stage or problem features",
+                    "Employ machine learning or pattern recognition to mine deep problem structures and optimal solution patterns then use learned insights to intelligently bias towards promising search regions or constructive choices",
+                    "Explore objective function engineering by introducing auxiliary or surrogate objectives or by dynamically adjusting weights to reshape the search landscape aiding escape from local optima or guiding diverse exploration"
+               ],
+               "attention_focus": "improving algorithm robustness across different problem instances",
+               "generation_tendency": "balanced_search",
+               "timestamp": 1757178801.959771
+          }
+     },
+     {
+          "algorithm": "Adaptively perturb the edge distance matrix by integrating a hybrid strategy that combines learned patterns from `edge_n_used`, dynamic scaling based on local optima entrapment likelihood, and reinforcement of under-explored edges to reshape the search landscape.",
+          "code": "import numpy as np\n\ndef update_edge_distance(edge_distance, local_opt_tour, edge_n_used):\n    num_nodes = edge_distance.shape[0]\n    updated_edge_distance = edge_distance.copy()\n    \n    # Step 1: Identify overused and underused edges\n    mean_usage = np.mean(edge_n_used[edge_n_used > 0])  # Avoid zero-division\n    overused_factor = 1.2  # Penalty factor for overused edges\n    underused_factor = 0.8  # Reward factor for underused edges\n    \n    for i in range(num_nodes):\n        for j in range(i + 1, num_nodes):\n            if edge_n_used[i, j] > mean_usage:\n                updated_edge_distance[i, j] *= overused_factor\n                updated_edge_distance[j, i] *= overused_factor\n            elif edge_n_used[i, j] < mean_usage:\n                updated_edge_distance[i, j] *= underused_factor\n                updated_edge_distance[j, i] *= underused_factor\n    \n    # Step 2: Perturb edges in the local optimal tour to escape local minima\n    perturbation_strength = 0.1  # Adjust strength dynamically based on problem size or iteration\n    for k in range(len(local_opt_tour) - 1):\n        i, j = local_opt_tour[k], local_opt_tour[k + 1]\n        updated_edge_distance[i, j] += perturbation_strength * (np.random.rand() - 0.5)\n        updated_edge_distance[j, i] = updated_edge_distance[i, j]\n    \n    # Step 3: Ensure non-negative distances\n    updated_edge_distance = np.maximum(updated_edge_distance, 0)\n    \n    return updated_edge_distance",
+          "objective": 1.65187,
+          "other_inf": null,
+          "metadata": {
+               "operator": "i1",
+               "wisdom_tips": [
+                    "Design adaptive hybrid meta-heuristics synergistically fusing multiple search paradigms and dynamically tune operator parameters based on search stage or problem features",
+                    "Employ machine learning or pattern recognition to mine deep problem structures and optimal solution patterns then use learned insights to intelligently bias towards promising search regions or constructive choices",
+                    "Explore objective function engineering by introducing auxiliary or surrogate objectives or by dynamically adjusting weights to reshape the search landscape aiding escape from local optima or guiding diverse exploration"
+               ],
+               "attention_focus": "improving algorithm robustness across different problem instances",
+               "generation_tendency": "balanced_search",
+               "timestamp": 1757178801.945673
+          }
+     },
+     {
+          "algorithm": "Design an adaptive edge penalty heuristic that dynamically adjusts distances based on local optimal tour usage patterns and edge utilization counts, blending exploration-exploitation principles with problem-specific insights to escape local optima.",
+          "code": "import numpy as np\n\ndef update_edge_distance(edge_distance, local_opt_tour, edge_n_used):\n    # Parameters for the heuristic\n    base_penalty_factor = 1.2\n    usage_sensitivity = 0.05\n    exploration_bonus = 0.1\n    \n    # Create a copy of the edge distance matrix to update\n    updated_edge_distance = edge_distance.copy()\n    \n    # Apply penalties to edges in the local optimal tour\n    for i in range(len(local_opt_tour) - 1):\n        u, v = local_opt_tour[i], local_opt_tour[i + 1]\n        # Penalize frequently used edges more heavily\n        penalty = base_penalty_factor * (1 + usage_sensitivity * edge_n_used[u, v])\n        updated_edge_distance[u, v] *= penalty\n        updated_edge_distance[v, u] *= penalty  # Ensure symmetry if undirected\n    \n    # Encourage exploration of underutilized edges\n    for u in range(edge_distance.shape[0]):\n        for v in range(u + 1, edge_distance.shape[1]):\n            if edge_n_used[u, v] == 0:  # Unused edges get an exploration bonus\n                updated_edge_distance[u, v] *= (1 - exploration_bonus)\n                updated_edge_distance[v, u] *= (1 - exploration_bonus)\n    \n    return updated_edge_distance",
+          "objective": 2.32602,
+          "other_inf": null,
+          "metadata": {
+               "operator": "i1",
+               "wisdom_tips": [
+                    "Design adaptive hybrid meta-heuristics synergistically fusing multiple search paradigms and dynamically tune operator parameters based on search stage or problem features",
+                    "Employ machine learning or pattern recognition to mine deep problem structures and optimal solution patterns then use learned insights to intelligently bias towards promising search regions or constructive choices",
+                    "Explore objective function engineering by introducing auxiliary or surrogate objectives or by dynamically adjusting weights to reshape the search landscape aiding escape from local optima or guiding diverse exploration"
+               ],
+               "attention_focus": "improving algorithm robustness across different problem instances",
+               "generation_tendency": "balanced_search",
+               "timestamp": 1757178834.104049
+          }
+     },
+     {
+          "algorithm": "Design a hybrid strategy that adaptively penalizes frequently used edges in the local optimal tour while rewarding underutilized edges, guided by edge usage statistics and dynamic scaling factors to balance intensification and diversification.",
+          "code": "import numpy as np\n\ndef update_edge_distance(edge_distance, local_opt_tour, edge_n_used):\n    # Parameters for penalization and reward\n    penalization_factor = 1.2\n    reward_factor = 0.8\n    scaling_factor = 0.5\n    \n    # Create a copy of the edge distance matrix to update\n    updated_edge_distance = edge_distance.copy()\n    \n    # Penalize edges in the local optimal tour based on their usage frequency\n    for i in range(len(local_opt_tour) - 1):\n        u, v = local_opt_tour[i], local_opt_tour[i + 1]\n        if edge_n_used[u, v] > 0:  # Only penalize if the edge has been used\n            updated_edge_distance[u, v] *= (1 + penalization_factor * scaling_factor * edge_n_used[u, v])\n            updated_edge_distance[v, u] = updated_edge_distance[u, v]  # Ensure symmetry\n    \n    # Reward underutilized edges globally\n    mean_usage = np.mean(edge_n_used[edge_n_used > 0])  # Avoid division by zero\n    for i in range(updated_edge_distance.shape[0]):\n        for j in range(i + 1, updated_edge_distance.shape[1]):\n            if edge_n_used[i, j] < mean_usage:\n                updated_edge_distance[i, j] *= (1 - reward_factor * scaling_factor * (mean_usage - edge_n_used[i, j]))\n                updated_edge_distance[j, i] = updated_edge_distance[i, j]  # Ensure symmetry\n    \n    return updated_edge_distance",
+          "objective": 2.57743,
+          "other_inf": null,
+          "metadata": {
+               "operator": "i1",
+               "wisdom_tips": [
+                    "Design adaptive hybrid meta-heuristics synergistically fusing multiple search paradigms and dynamically tune operator parameters based on search stage or problem features",
+                    "Employ machine learning or pattern recognition to mine deep problem structures and optimal solution patterns then use learned insights to intelligently bias towards promising search regions or constructive choices",
+                    "Explore objective function engineering by introducing auxiliary or surrogate objectives or by dynamically adjusting weights to reshape the search landscape aiding escape from local optima or guiding diverse exploration"
+               ],
+               "attention_focus": "balancing local optimality with global search strategies",
+               "generation_tendency": "balanced_search",
+               "timestamp": 1757178724.96204
+          }
+     },
+     {
+          "algorithm": "Design an adaptive edge penalty heuristic that dynamically adjusts distances based on local optimal tour usage patterns and edge utilization frequency to escape local optima while maintaining computational efficiency.",
+          "code": "import numpy as np\n\ndef update_edge_distance(edge_distance, local_opt_tour, edge_n_used):\n    updated_edge_distance = edge_distance.copy()\n    n = len(edge_distance)\n    \n    # Calculate penalties based on local_opt_tour and edge_n_used\n    penalty_factor = 1 + np.log1p(edge_n_used) / (1 + np.max(edge_n_used))\n    for i in range(len(local_opt_tour) - 1):\n        u, v = local_opt_tour[i], local_opt_tour[i + 1]\n        updated_edge_distance[u, v] += penalty_factor[u, v] * edge_distance[u, v]\n        updated_edge_distance[v, u] = updated_edge_distance[u, v]\n    \n    # Apply global smoothing to avoid excessive penalties\n    smoothing_factor = 0.1\n    updated_edge_distance += smoothing_factor * np.mean(edge_distance)\n    \n    return updated_edge_distance",
+          "objective": 2.71276,
+          "other_inf": null,
+          "metadata": {
+               "operator": "i1",
+               "wisdom_tips": [
+                    "Design adaptive hybrid meta-heuristics synergistically fusing multiple search paradigms and dynamically tune operator parameters based on search stage or problem features",
+                    "Employ machine learning or pattern recognition to mine deep problem structures and optimal solution patterns then use learned insights to intelligently bias towards promising search regions or constructive choices",
+                    "Explore objective function engineering by introducing auxiliary or surrogate objectives or by dynamically adjusting weights to reshape the search landscape aiding escape from local optima or guiding diverse exploration"
+               ],
+               "attention_focus": "managing computational complexity and time efficiency",
+               "generation_tendency": "balanced_search",
+               "timestamp": 1757178724.9818702
+          }
+     },
+     {
+          "algorithm": "Design an adaptive hybrid algorithm that dynamically adjusts edge distances using a penalty-reward system based on edge usage frequency and local optimal tour structure, guided by problem-specific patterns and search-stage awareness.",
+          "code": "import numpy as np\n\ndef update_edge_distance(edge_distance, local_opt_tour, edge_n_used):\n    # Parameters for penalty and reward (can be tuned)\n    penalty_factor = 1.2\n    reward_factor = 0.8\n    min_penalty = 0.1\n    max_reward = 0.5\n    \n    # Create a copy of the edge distance matrix to update\n    updated_edge_distance = edge_distance.copy()\n    \n    # Extract edges from the local optimal tour\n    n = len(local_opt_tour)\n    for i in range(n):\n        u = local_opt_tour[i]\n        v = local_opt_tour[(i + 1) % n]  # Wrap around for the last edge\n        \n        # Penalize frequently used edges in the local optimal tour\n        if edge_n_used[u, v] > 1:  # Only penalize if used more than once\n            penalty = min(min_penalty + edge_n_used[u, v] * penalty_factor, edge_distance[u, v])\n            updated_edge_distance[u, v] += penalty\n            updated_edge_distance[v, u] += penalty  # Ensure symmetry\n        \n        # Reward underused edges outside the local optimal tour\n        for node in range(updated_edge_distance.shape[0]):\n            if node != u and node != v:\n                if edge_n_used[u, node] == 0 or edge_n_used[node, u] == 0:\n                    reward = max(max_reward, edge_distance[u, node] * reward_factor)\n                    updated_edge_distance[u, node] -= reward\n                    updated_edge_distance[node, u] -= reward  # Ensure symmetry\n    \n    return updated_edge_distance",
+          "objective": 3.31592,
+          "other_inf": null,
+          "metadata": {
+               "operator": "i1",
+               "wisdom_tips": [
+                    "Design adaptive hybrid meta-heuristics synergistically fusing multiple search paradigms and dynamically tune operator parameters based on search stage or problem features",
+                    "Employ machine learning or pattern recognition to mine deep problem structures and optimal solution patterns then use learned insights to intelligently bias towards promising search regions or constructive choices",
+                    "Explore objective function engineering by introducing auxiliary or surrogate objectives or by dynamically adjusting weights to reshape the search landscape aiding escape from local optima or guiding diverse exploration"
+               ],
+               "attention_focus": "improving algorithm robustness across different problem instances",
+               "generation_tendency": "balanced_search",
+               "timestamp": 1757178801.949638
+          }
+     },
+     {
+          "algorithm": "Design an adaptive hybrid algorithm that dynamically adjusts edge distances using a feedback-driven penalty system based on edge usage frequency and local optimal tour structure, integrating pattern recognition to bias exploration toward underutilized yet promising edges.",
+          "code": "import numpy as np\n\ndef update_edge_distance(edge_distance, local_opt_tour, edge_n_used):\n    num_nodes = edge_distance.shape[0]\n    updated_edge_distance = edge_distance.copy()\n    \n    # Calculate penalties based on edge usage frequency\n    max_usage = np.max(edge_n_used)\n    min_usage = np.min(edge_n_used)\n    usage_range = max_usage - min_usage if max_usage != min_usage else 1\n    usage_penalty = (edge_n_used - min_usage) / usage_range\n    \n    # Penalize edges in the local optimal tour\n    for i in range(len(local_opt_tour)):\n        u = local_opt_tour[i]\n        v = local_opt_tour[(i + 1) % len(local_opt_tour)]\n        updated_edge_distance[u, v] += edge_distance[u, v] * 0.2  # Add 20% penalty\n        updated_edge_distance[v, u] += edge_distance[v, u] * 0.2  # Symmetric update\n    \n    # Combine usage-based penalties with local tour penalties\n    updated_edge_distance += edge_distance * usage_penalty * 0.5  # Scale usage penalty impact\n    \n    return updated_edge_distance",
+          "objective": 3.45388,
+          "other_inf": null,
+          "metadata": {
+               "operator": "i1",
+               "wisdom_tips": [
+                    "Design adaptive hybrid meta-heuristics synergistically fusing multiple search paradigms and dynamically tune operator parameters based on search stage or problem features",
+                    "Employ machine learning or pattern recognition to mine deep problem structures and optimal solution patterns then use learned insights to intelligently bias towards promising search regions or constructive choices",
+                    "Explore objective function engineering by introducing auxiliary or surrogate objectives or by dynamically adjusting weights to reshape the search landscape aiding escape from local optima or guiding diverse exploration"
+               ],
+               "attention_focus": "improving algorithm robustness across different problem instances",
+               "generation_tendency": "balanced_search",
+               "timestamp": 1757178724.961982
+          }
+     },
+     {
+          "algorithm": "Adaptively perturb the edge distance matrix by integrating a hybrid meta-heuristic that dynamically adjusts edge costs based on usage frequency, local optima structure, and problem-specific patterns to escape stagnation.",
+          "code": "import numpy as np\n\ndef update_edge_distance(edge_distance, local_opt_tour, edge_n_used):\n    num_nodes = edge_distance.shape[0]\n    updated_edge_distance = edge_distance.copy()\n    \n    # Compute average edge usage to identify overused edges\n    avg_usage = np.mean(edge_n_used[edge_n_used > 0]) if np.any(edge_n_used > 0) else 1.0\n    \n    # Adaptive penalty factor based on usage frequency\n    penalty_factor = 1.0 + (edge_n_used / (avg_usage + 1e-8)) ** 0.5\n    \n    # Apply penalties to overused edges\n    updated_edge_distance *= penalty_factor\n    \n    # Reward underused edges to encourage exploration\n    reward_factor = 1.0 / (1.0 + np.sqrt(edge_n_used))\n    updated_edge_distance *= reward_factor\n    \n    # Introduce a small random perturbation to break symmetry\n    random_perturbation = 1.0 + 0.05 * np.random.uniform(-1, 1, size=edge_distance.shape)\n    updated_edge_distance *= random_perturbation\n    \n    # Ensure symmetry in the updated edge distance matrix\n    updated_edge_distance = np.maximum(updated_edge_distance, updated_edge_distance.T)\n    \n    return updated_edge_distance",
+          "objective": 3.61756,
+          "other_inf": null,
+          "metadata": {
+               "operator": "i1",
+               "wisdom_tips": [
+                    "Design adaptive hybrid meta-heuristics synergistically fusing multiple search paradigms and dynamically tune operator parameters based on search stage or problem features",
+                    "Employ machine learning or pattern recognition to mine deep problem structures and optimal solution patterns then use learned insights to intelligently bias towards promising search regions or constructive choices",
+                    "Explore objective function engineering by introducing auxiliary or surrogate objectives or by dynamically adjusting weights to reshape the search landscape aiding escape from local optima or guiding diverse exploration"
+               ],
+               "attention_focus": "improving algorithm robustness across different problem instances",
+               "generation_tendency": "balanced_search",
+               "timestamp": 1757178766.612194
+          }
+     }
+]

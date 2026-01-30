@@ -1,0 +1,138 @@
+[
+     {
+          "algorithm": "```",
+          "code": "import numpy as np\n\ndef update_edge_distance(edge_distance, local_opt_tour, edge_n_used):\n    num_nodes = edge_distance.shape[0]\n    updated_edge_distance = edge_distance.copy()\n    \n    # Simplified parameter initialization\n    topology_penalty_weight = 0.5\n    smoothing_factor = 0.1\n    \n    # Simplified topology-aware penalties based on local optimal tour\n    for i in range(len(local_opt_tour) - 1):\n        u, v = local_opt_tour[i], local_opt_tour[i + 1]\n        penalty = topology_penalty_weight * (1 + np.exp(-edge_n_used[u, v]))\n        updated_edge_distance[u, v] += penalty\n        updated_edge_distance[v, u] = updated_edge_distance[u, v]\n    \n    # Simplified stochastic perturbations with adaptive scaling\n    gradient_perturbation = np.random.uniform(-smoothing_factor, smoothing_factor, (num_nodes, num_nodes))\n    updated_edge_distance += gradient_perturbation\n    \n    # Ensure no negative distances\n    updated_edge_distance = np.maximum(updated_edge_distance, 0)\n    \n    return updated_edge_distance",
+          "objective": 0.21461,
+          "other_inf": null,
+          "metadata": {
+               "operator": "m3",
+               "wisdom_tips": [
+                    "Design adaptive hybrid meta-heuristics synergistically fusing multiple search paradigms and dynamically tune operator parameters based on search stage or problem features",
+                    "Employ machine learning or pattern recognition to mine deep problem structures and optimal solution patterns then use learned insights to intelligently bias towards promising search regions or constructive choices",
+                    "Explore objective function engineering by introducing auxiliary or surrogate objectives or by dynamically adjusting weights to reshape the search landscape aiding escape from local optima or guiding diverse exploration"
+               ],
+               "attention_focus": "experimenting with hybrid strategy combinations",
+               "generation_tendency": "focus_exploration",
+               "timestamp": 1757180120.721326
+          }
+     },
+     {
+          "algorithm": "Design a hybrid meta-heuristic that integrates chaotic dynamic penalties, frequency-driven edge smoothing, and adaptive structural reinforcement to iteratively reshape the search landscape while balancing exploration and exploitation through non-linear feedback mechanisms.",
+          "code": "import numpy as np\n\ndef update_edge_distance(edge_distance, local_opt_tour, edge_n_used):\n    num_nodes = edge_distance.shape[0]\n    updated_edge_distance = edge_distance.copy()\n    \n    # Parameter initialization\n    chaos_factor = 1.3\n    smoothing_weight = 0.5\n    reinforcement_weight = 0.7\n    \n    # Compute chaotic dynamic penalties based on local optimal tour\n    for i in range(len(local_opt_tour) - 1):\n        u, v = local_opt_tour[i], local_opt_tour[i + 1]\n        penalty = chaos_factor * (1 + np.sin(edge_n_used[u, v] / (np.pi + 1e-8)))\n        updated_edge_distance[u, v] += penalty\n        updated_edge_distance[v, u] = updated_edge_distance[u, v]\n    \n    # Apply frequency-driven edge smoothing\n    smoothing_factor = smoothing_weight * (1 - np.tanh(edge_n_used / (np.max(edge_n_used) + 1e-8)))\n    updated_edge_distance -= smoothing_factor\n    \n    # Introduce adaptive structural reinforcement\n    reinforcement = reinforcement_weight * np.log(1 + np.outer(np.mean(edge_n_used, axis=1), np.mean(edge_n_used, axis=0)))\n    reinforcement = np.clip(reinforcement, 0, None)  # Ensure non-negative adjustments\n    updated_edge_distance += reinforcement\n    \n    # Ensure no negative distances\n    updated_edge_distance = np.maximum(updated_edge_distance, 0)\n    \n    return updated_edge_distance",
+          "objective": 0.25838,
+          "other_inf": null,
+          "metadata": {
+               "operator": "e2",
+               "wisdom_tips": [
+                    "Integrate adaptive perturbation and biasing mechanisms to dynamically reshape the search landscape while preserving structural insights for guided exploration.",
+                    "Leverage frequency-based feedback and chaos-inspired strategies to balance exploitation and exploration in evolving problem spaces.",
+                    "Design adaptive hybrid meta-heuristics synergistically fusing multiple search paradigms and dynamically tune operator parameters based on search stage or problem features"
+               ],
+               "attention_focus": "experimenting with hybrid strategy combinations",
+               "generation_tendency": "focus_exploration",
+               "timestamp": 1757179532.033579
+          }
+     },
+     {
+          "algorithm": "Design a hybrid strategy combining entropy-driven exploration, topology-aware penalties, and stochastic gradient-inspired perturbations to dynamically reshape the edge distance matrix for enhanced global search capability.",
+          "code": "import numpy as np\n\ndef update_edge_distance(edge_distance, local_opt_tour, edge_n_used):\n    num_nodes = edge_distance.shape[0]\n    updated_edge_distance = edge_distance.copy()\n    \n    # Parameter initialization\n    entropy_weight = 0.4\n    topology_penalty_weight = 0.3\n    gradient_perturbation_weight = 0.5\n    smoothing_factor = 0.1\n    \n    # Compute entropy-driven exploration adjustments\n    edge_probabilities = edge_n_used / (np.sum(edge_n_used) + 1e-8)\n    entropy = -np.sum(edge_probabilities * np.log(edge_probabilities + 1e-8))\n    entropy_adjustment = entropy_weight * (1 - entropy / np.log(num_nodes))\n    updated_edge_distance += entropy_adjustment * edge_distance\n    \n    # Add topology-aware penalties based on local optimal tour\n    for i in range(len(local_opt_tour) - 1):\n        u, v = local_opt_tour[i], local_opt_tour[i + 1]\n        penalty = topology_penalty_weight * (1 + np.exp(-edge_n_used[u, v]))\n        updated_edge_distance[u, v] += penalty\n        updated_edge_distance[v, u] = updated_edge_distance[u, v]\n    \n    # Introduce stochastic gradient-inspired perturbations\n    gradient_perturbation = gradient_perturbation_weight * np.random.randn(num_nodes, num_nodes)\n    gradient_perturbation = np.clip(gradient_perturbation, -smoothing_factor, smoothing_factor)\n    updated_edge_distance += gradient_perturbation\n    \n    # Ensure no negative distances\n    updated_edge_distance = np.maximum(updated_edge_distance, 0)\n    \n    return updated_edge_distance",
+          "objective": 0.31112,
+          "other_inf": null,
+          "metadata": {
+               "operator": "e1",
+               "wisdom_tips": [
+                    "Dynamically reshape the search landscape by integrating adaptive penalties and perturbations to balance exploration and exploitation effectively.",
+                    "Leverage learned structural insights and frequency-based feedback to guide decision-making while maintaining diversity in solution exploration.",
+                    "Design adaptive hybrid meta-heuristics synergistically fusing multiple search paradigms and dynamically tune operator parameters based on search stage or problem features"
+               ],
+               "attention_focus": "experimenting with hybrid strategy combinations",
+               "generation_tendency": "focus_exploration",
+               "timestamp": 1757179471.5882251
+          }
+     },
+     {
+          "algorithm": "```",
+          "code": "import numpy as np\n\ndef update_edge_distance(edge_distance, local_opt_tour, edge_n_used):\n    num_nodes = edge_distance.shape[0]\n    updated_edge_distance = edge_distance.copy()\n    \n    # Parameter initialization\n    topology_penalty_weight = 0.3\n    smoothing_factor = 0.1\n    \n    # Add topology-aware penalties based on local optimal tour\n    for i in range(len(local_opt_tour) - 1):\n        u, v = local_opt_tour[i], local_opt_tour[i + 1]\n        penalty = topology_penalty_weight * (1 + np.exp(-edge_n_used[u, v]))\n        updated_edge_distance[u, v] += penalty\n        updated_edge_distance[v, u] = updated_edge_distance[u, v]\n    \n    # Introduce stochastic perturbations with simplified gradient-inspired noise\n    perturbation = np.random.uniform(-smoothing_factor, smoothing_factor, (num_nodes, num_nodes))\n    updated_edge_distance += perturbation\n    \n    # Ensure no negative distances\n    updated_edge_distance = np.maximum(updated_edge_distance, 0)\n    \n    return updated_edge_distance",
+          "objective": 0.31318,
+          "other_inf": null,
+          "metadata": {
+               "operator": "m3",
+               "wisdom_tips": [
+                    "Design adaptive hybrid meta-heuristics synergistically fusing multiple search paradigms and dynamically tune operator parameters based on search stage or problem features",
+                    "Employ machine learning or pattern recognition to mine deep problem structures and optimal solution patterns then use learned insights to intelligently bias towards promising search regions or constructive choices",
+                    "Explore objective function engineering by introducing auxiliary or surrogate objectives or by dynamically adjusting weights to reshape the search landscape aiding escape from local optima or guiding diverse exploration"
+               ],
+               "attention_focus": "experimenting with hybrid strategy combinations",
+               "generation_tendency": "focus_exploration",
+               "timestamp": 1757180120.721349
+          }
+     },
+     {
+          "algorithm": "```",
+          "code": "import numpy as np\n\ndef update_edge_distance(edge_distance, local_opt_tour, edge_n_used):\n    num_nodes = edge_distance.shape[0]\n    updated_edge_distance = edge_distance.copy()\n    \n    # Simplified parameter initialization\n    topology_penalty_weight = 0.5\n    smoothing_factor = 0.1\n    \n    # Simplified topology-aware penalties based on local optimal tour\n    for i in range(len(local_opt_tour) - 1):\n        u, v = local_opt_tour[i], local_opt_tour[i + 1]\n        penalty = topology_penalty_weight * (1 + np.exp(-edge_n_used[u, v]))\n        updated_edge_distance[u, v] += penalty\n        updated_edge_distance[v, u] = updated_edge_distance[u, v]\n    \n    # Simplified stochastic perturbations with adaptive scaling\n    gradient_perturbation = np.random.uniform(-smoothing_factor, smoothing_factor, (num_nodes, num_nodes))\n    updated_edge_distance += gradient_perturbation\n    \n    # Ensure no negative distances\n    updated_edge_distance = np.maximum(updated_edge_distance, 0)\n    \n    return updated_edge_distance",
+          "objective": 0.33491,
+          "other_inf": null,
+          "metadata": {
+               "operator": "m3",
+               "wisdom_tips": [
+                    "Design adaptive hybrid meta-heuristics synergistically fusing multiple search paradigms and dynamically tune operator parameters based on search stage or problem features",
+                    "Employ machine learning or pattern recognition to mine deep problem structures and optimal solution patterns then use learned insights to intelligently bias towards promising search regions or constructive choices",
+                    "Explore objective function engineering by introducing auxiliary or surrogate objectives or by dynamically adjusting weights to reshape the search landscape aiding escape from local optima or guiding diverse exploration"
+               ],
+               "attention_focus": "experimenting with hybrid strategy combinations",
+               "generation_tendency": "focus_exploration",
+               "timestamp": 1757180140.694516
+          }
+     },
+     {
+          "algorithm": "```",
+          "code": "import numpy as np\n\ndef update_edge_distance(edge_distance, local_opt_tour, edge_n_used):\n    num_nodes = edge_distance.shape[0]\n    updated_edge_distance = edge_distance.copy()\n    \n    # Parameter initialization\n    entropy_weight = 0.3\n    topology_penalty_weight = 0.2\n    \n    # Compute entropy-driven exploration adjustments\n    edge_probabilities = edge_n_used / (np.sum(edge_n_used) + 1e-8)\n    entropy = -np.sum(edge_probabilities * np.log(edge_probabilities + 1e-8))\n    entropy_adjustment = entropy_weight * (1 - entropy / np.log(num_nodes))\n    updated_edge_distance += entropy_adjustment * edge_distance\n    \n    # Add topology-aware penalties based on local optimal tour\n    for i in range(len(local_opt_tour) - 1):\n        u, v = local_opt_tour[i], local_opt_tour[i + 1]\n        penalty = topology_penalty_weight * (1 + np.exp(-edge_n_used[u, v]))\n        updated_edge_distance[u, v] += penalty\n        updated_edge_distance[v, u] = updated_edge_distance[u, v]\n    \n    # Ensure no negative distances\n    updated_edge_distance = np.maximum(updated_edge_distance, 0)\n    \n    return updated_edge_distance",
+          "objective": 0.44865,
+          "other_inf": null,
+          "metadata": {
+               "operator": "m3",
+               "wisdom_tips": [
+                    "Design adaptive hybrid meta-heuristics synergistically fusing multiple search paradigms and dynamically tune operator parameters based on search stage or problem features",
+                    "Employ machine learning or pattern recognition to mine deep problem structures and optimal solution patterns then use learned insights to intelligently bias towards promising search regions or constructive choices",
+                    "Explore objective function engineering by introducing auxiliary or surrogate objectives or by dynamically adjusting weights to reshape the search landscape aiding escape from local optima or guiding diverse exploration"
+               ],
+               "attention_focus": "experimenting with hybrid strategy combinations",
+               "generation_tendency": "focus_exploration",
+               "timestamp": 1757180140.8505862
+          }
+     },
+     {
+          "algorithm": "Design an adaptive hybrid meta-heuristic that synergistically combines entropy-driven exploration, machine learning-based edge biasing, and dynamically weighted perturbations to reshape the search landscape and escape local optima.",
+          "code": "import numpy as np\n\ndef update_edge_distance(edge_distance, local_opt_tour, edge_n_used):\n    num_nodes = edge_distance.shape[0]\n    updated_edge_distance = edge_distance.copy()\n    \n    # Parameter initialization with significantly different values\n    entropy_weight = 0.7\n    ml_bias_weight = 0.5\n    perturbation_weight = 0.3\n    smoothing_factor = 0.2\n    \n    # Compute entropy-driven exploration adjustments\n    edge_probabilities = edge_n_used / (np.sum(edge_n_used) + 1e-8)\n    entropy = -np.sum(edge_probabilities * np.log(edge_probabilities + 1e-8))\n    entropy_adjustment = entropy_weight * (1 - entropy / np.log(num_nodes))\n    updated_edge_distance += entropy_adjustment * edge_distance\n    \n    # Introduce machine learning-based edge biasing\n    edge_usage_pattern = edge_n_used / (np.max(edge_n_used) + 1e-8)\n    ml_bias = ml_bias_weight * (1 - edge_usage_pattern)\n    updated_edge_distance += ml_bias * edge_distance\n    \n    # Apply dynamically weighted stochastic perturbations\n    perturbation = perturbation_weight * np.random.uniform(-1, 1, (num_nodes, num_nodes))\n    perturbation = np.clip(perturbation, -smoothing_factor, smoothing_factor)\n    updated_edge_distance += perturbation\n    \n    # Ensure no negative distances\n    updated_edge_distance = np.maximum(updated_edge_distance, 0)\n    \n    return updated_edge_distance",
+          "objective": 0.45054,
+          "other_inf": null,
+          "metadata": {
+               "operator": "m2",
+               "wisdom_tips": [
+                    "Design adaptive hybrid meta-heuristics synergistically fusing multiple search paradigms and dynamically tune operator parameters based on search stage or problem features",
+                    "Employ machine learning or pattern recognition to mine deep problem structures and optimal solution patterns then use learned insights to intelligently bias towards promising search regions or constructive choices",
+                    "Explore objective function engineering by introducing auxiliary or surrogate objectives or by dynamically adjusting weights to reshape the search landscape aiding escape from local optima or guiding diverse exploration"
+               ],
+               "attention_focus": "experimenting with hybrid strategy combinations",
+               "generation_tendency": "focus_exploration",
+               "timestamp": 1757180032.183137
+          }
+     },
+     {
+          "algorithm": "Design a hybrid meta-heuristic that combines chaotic oscillation-driven penalties, frequency-aware edge smoothing, and hierarchical structural biasing to dynamically reshape the search landscape while balancing exploration and exploitation.",
+          "code": "import numpy as np\n\ndef update_edge_distance(edge_distance, local_opt_tour, edge_n_used):\n    num_nodes = edge_distance.shape[0]\n    updated_edge_distance = edge_distance.copy()\n    \n    # Parameter initialization\n    chaos_amplitude = 1.3\n    smoothing_factor = 0.7\n    structural_bias_weight = 0.5\n    \n    # Compute penalties using chaotic oscillation dynamics\n    for i in range(len(local_opt_tour) - 1):\n        u, v = local_opt_tour[i], local_opt_tour[i + 1]\n        chaos_penalty = chaos_amplitude * (2 * np.abs((edge_n_used[u, v] % 1) - 0.5))\n        updated_edge_distance[u, v] += chaos_penalty\n        updated_edge_distance[v, u] = updated_edge_distance[u, v]\n    \n    # Apply frequency-aware edge smoothing\n    edge_frequency = edge_n_used / (np.max(edge_n_used) + 1e-8)\n    smoothed_adjustment = smoothing_factor * (1 - edge_frequency) * edge_distance\n    updated_edge_distance += smoothed_adjustment\n    \n    # Introduce hierarchical structural biasing\n    row_bias = np.mean(edge_n_used, axis=1, keepdims=True)\n    col_bias = np.mean(edge_n_used, axis=0, keepdims=True)\n    structural_bias = structural_bias_weight * (row_bias + col_bias)\n    updated_edge_distance += structural_bias\n    \n    # Ensure no negative distances\n    updated_edge_distance = np.maximum(updated_edge_distance, 0)\n    \n    return updated_edge_distance",
+          "objective": 0.55876,
+          "other_inf": null,
+          "metadata": {
+               "operator": "e2",
+               "wisdom_tips": [
+                    "Integrate adaptive perturbation and biasing mechanisms to dynamically reshape the search landscape while preserving structural insights for guided exploration.",
+                    "Leverage frequency-based feedback and chaos-inspired strategies to balance exploitation and exploration in evolving problem spaces.",
+                    "Design adaptive hybrid meta-heuristics synergistically fusing multiple search paradigms and dynamically tune operator parameters based on search stage or problem features"
+               ],
+               "attention_focus": "experimenting with hybrid strategy combinations",
+               "generation_tendency": "focus_exploration",
+               "timestamp": 1757179532.018923
+          }
+     }
+]

@@ -1,206 +1,183 @@
 <div align="center">
 
-# HiFo：层次化反馈驱动优化框架
+<h1 align="center">HiFo-Prompt</h1>
 
-### 基于大语言模型驱动的进化计算自动算法设计平台
+<h3 align="center">基于回顾与前瞻提示的大模型自动启发式算法设计</h3>
 
 <p align="center">
-  <strong>Insight Pool 洞察池</strong> · <strong>Evolutionary Navigator 演化导航器</strong> · <strong>反馈驱动学习</strong>
+<strong>🧠 回顾式洞察池 (Insight Pool)</strong> · <strong>🔭 前瞻式演化导航器 (Navigator)</strong> · <strong>🔄 闭环进化</strong>
 </p>
 
-[English Version](./README.md) · [文档](https://github.com/FeiLiu36/HiFo/tree/main/docs) · [示例](./examples)
+![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)
+![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=flat-square&logo=python&logoColor=white)
+![Release](https://img.shields.io/badge/Release-v1.0.0-green?style=flat-square)
 
-[![GitHub](https://img.shields.io/badge/GitHub-HiFo-181717?style=for-the-badge&logo=github)](https://github.com/FeiLiu36/HiFo)
-[![License](https://img.shields.io/badge/许可证-MIT-green?style=for-the-badge)](./LICENSE)
-[![Python](https://img.shields.io/badge/Python-≥3.10-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
+[English](./README.md) · [中文 (Chinese)](./README_CN.md)
 
 </div>
 
----
+<br/>
 
-## 概述
+## 📖 简介
 
-**HiFo** 是一个前沿的自动算法设计框架，将**进化计算（EC）**与**大语言模型（LLM）**相结合。该框架创新性地引入了 **Insight Pool（洞察池）**机制，能够在进化过程中学习、存储和利用设计原则。
+**HiFo-Prompt**（Hindsight-Foresight Prompt，回顾-前瞻提示）是一个创新的**自动启发式算法设计（AHD）**框架，将**大语言模型（LLM）**与**进化计算（EC）**协同结合。
 
-### 为什么选择 HiFo？
+现有的基于 LLM 的方法通常存在*短期记忆*（遗忘成功的技巧）和*缺乏方向*（随机搜索无策略）的问题。HiFo-Prompt 通过引入两个关键机制解决了这些问题：
 
-传统的自动算法设计方法通常缺乏跨代际积累和迁移知识的能力。HiFo 通过以下特性解决了这一局限：
+- **🧠 回顾（Insight Pool 洞察池）**：一个自我进化的知识库，从高性能启发式算法中提炼和存储"设计原则"，避免系统重复发明轮子。
 
-| 特性 | 描述 |
-|------|------|
-| **Insight Pool（洞察池）** | 自动从成功的算法中提取高层设计原则，并用于指导后续代际的生成 |
-| **Evolutionary Navigator（演化导航器）** | 基于实时搜索进度动态决定搜索策略（探索/利用/平衡），并提供设计指令 |
-| **反馈驱动学习** | 根据洞察在生成高质量解决方案中的实际效果持续优化 |
+- **🔭 前瞻（Evolutionary Navigator 演化导航器）**：一个元控制器，监控种群动态（停滞、多样性），并通过特定的**设计指令（Design Directive）**主动切换搜索策略（*探索 Explore*、*利用 Exploit* 或 *平衡 Balance*）。
 
----
+<br/>
 
-## 系统架构
+## 🔥 核心特性
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                        HiFo 框架                                │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                 │
-│   ┌──────────────┐    ┌──────────────┐    ┌──────────────┐     │
-│   │   LLM API    │◄──►│    进化      │◄──►│    评估      │     │
-│   │  (GPT等)     │    │    引擎      │    │    模块      │     │
-│   └──────────────┘    └──────┬───────┘    └──────────────┘     │
-│                              │                                  │
-│                              ▼                                  │
-│          ┌───────────────────────────────────────┐             │
-│          │         HiFo-Prompt 提示层            │             │
-│          ├───────────────────┬───────────────────┤             │
-│          │    Insight Pool   │    Navigator      │             │
-│          │     洞察池        │    演化导航器     │             │
-│          │  ┌─────────────┐  │  ┌─────────────┐  │             │
-│          │  │  设计原则   │  │  │   Regime    │  │             │
-│          │  │  效果反馈   │  │  │  Directive  │  │             │
-│          │  └─────────────┘  │  └─────────────┘  │             │
-│          └───────────────────┴───────────────────┘             │
-│                                                                 │
-└─────────────────────────────────────────────────────────────────┘
-```
+| 组件 | 功能 | 重要性 |
+|------|------|--------|
+| **Insight Pool（洞察池）** | 提取并复用知识 | 不再丢弃父代，而是提取它们*成功的原因*。提示词中注入经过验证的"洞察"。 |
+| **Evolutionary Navigator（演化导航器）** | 自适应控制 | 检测搜索是否陷入停滞或过于狭窄（低多样性），动态调整提示策略。 |
+| **解耦评估** | 高效流程 | 将"思考"与"代码"解耦，相比标准方法实现更快的迭代和更低的 Token 消耗。 |
 
----
+<br/>
 
-## 安装
+## 🛠️ 安装
 
-### 环境要求
-
-- Python ≥ 3.10
-- NumPy
-- Numba
-- Joblib
-
-### 快速安装
+我们推荐使用 **Conda** 管理环境。
 
 ```bash
-# 克隆仓库
-git clone https://github.com/FeiLiu36/HiFo.git
-cd HiFo/hifo
+# 1. 创建环境
+conda create -n hifo python=3.10
+conda activate hifo
 
-# 开发模式安装
+# 2. 克隆仓库
+git clone https://github.com/FeiLiu36/HiFo.git
+cd HiFo
+
+# 3. 安装依赖
+cd hifo
 pip install -e .
 ```
 
-或直接安装：
+<br/>
 
-```bash
-cd hifo
-pip install .
-```
+## 🚀 快速开始
 
----
+> **注意**：您必须拥有 LLM API 密钥（如 OpenAI、DeepSeek、Qwen）或运行本地 LLM 服务器。
 
-## 快速开始
-
-### 基本用法
+### 1. 基本使用结构
 
 ```python
 from hifo import hifo
 from hifo.utils.getParas import Paras
 
-# 初始化参数
-paras = Paras()
+# 1. 初始化参数
+paras = Paras() 
 
-# 配置 HiFo
+# 2. 配置 HiFo
 paras.set_paras(
-    method="hifo",
-    problem="tsp_construct",              # 问题类型
-    llm_api_endpoint="api.deepseek.com",  # LLM API 端点
-    llm_api_key="your-api-key",           # API 密钥
-    llm_model="deepseek-chat",            # 模型名称
-    ec_pop_size=8,                        # 种群大小
-    ec_n_pop=10,                          # 进化代数
-    exp_n_proc=4,                         # 并行进程数
-    exp_debug_mode=False
+    method = "hifo",               
+    problem = "tsp_construct",          # 问题类型: 'tsp_construct', 'bp_online'
+    llm_api_endpoint = "api.deepseek.com", # 您的 API 端点
+    llm_api_key = "sk-xxxxxxxx",        # 您的 API 密钥
+    llm_model = "deepseek-chat",        # 模型名称
+    ec_pop_size = 4,                    # 种群大小（推荐: 4-8）
+    ec_n_pop = 10,                      # 进化代数
+    exp_n_proc = 4,                     # 评估并行线程数
+    exp_debug_mode = False              # 设为 True 可查看提示构建详情
 )
 
-# 运行进化
+# 3. 初始化并运行
 evolution = hifo.EVOL(paras)
 evolution.run()
 ```
 
-### 支持的问题类型
+### 2. 运行示例
 
-| 问题 | 描述 | 示例路径 |
-|------|------|----------|
-| `tsp_construct` | TSP 构造式启发式 | `examples/tsp_construct/` |
-| `bp_online` | 在线装箱问题 | `examples/bp_online/` |
-| 自定义 | 您自己的优化问题 | `examples/user_XXX/` |
+我们为标准组合优化问题提供了即用型脚本。
 
----
+#### 旅行商问题（TSP）
 
-## 使用示例
-
-### 示例 1：TSP 构造式启发式
+为 TSP 设计构造式启发式算法。
 
 ```bash
 cd examples/tsp_construct
 python runHiFo.py
 ```
 
-**评估进化出的启发式算法：**
-```bash
-cd examples/tsp_construct/evaluation
-# 将您的启发式代码复制到 heuristic.py
-python runEval.py
-```
+#### 在线装箱问题（BPP）
 
-### 示例 2：在线装箱问题
+为在线装箱设计评分函数。
 
 ```bash
 cd examples/bp_online
 python runHiFo.py
 ```
 
-### 示例 3：自定义问题
+#### 自定义问题
 
-参考 `examples/user_XXX/` 中的模板创建您自己的问题。
+```bash
+cd examples/user_XXX
+python runHiFo.py
+```
 
----
+<br/>
 
-## 大模型配置
+## ⚙️ 大模型配置
 
-### 方式一：远程 LLM API（推荐）
+HiFo-Prompt 支持**远程 API** 和**本地 LLM 部署**两种方式。
 
-| 服务商 | 端点 | 说明 |
-|--------|------|------|
-| **DeepSeek** | `api.deepseek.com` | 性价比高，性能优秀 |
-| **OpenAI** | `api.openai.com` | GPT-3.5/4 |
-| **其他** | 多种 | 见[API 服务商](#api-服务商) |
+### 方式 A：远程 API（推荐）
 
-### 方式二：本地 LLM 部署
+支持协议：OpenAI 兼容 API（DeepSeek、Moonshot、ChatGPT 等）。
 
-1. 从 HuggingFace 下载模型：
-   ```bash
-   git clone https://huggingface.co/google/gemma-2b-it
-   ```
+修改 `runHiFo.py`：
 
-2. 启动本地服务：
-   ```bash
-   cd llm_server
-   python gemma_instruct_server.py
-   ```
+```python
+llm_api_endpoint = "api.openai.com" 
+llm_api_key = "your_key"
+llm_model = "gpt-4o"
+```
 
-3. 配置 HiFo 使用本地端点：
-   ```python
-   paras.set_paras(
-       llm_use_local=True,
-       llm_local_url="http://127.0.0.1:11012/completions",
-       ...
-   )
-   ```
+### 方式 B：本地 LLM（vLLM / HuggingFace）
 
-### API 服务商
+1. 启动本地服务器（例如使用 vLLM）：
 
-- [DeepSeek API](https://platform.deepseek.com/) - 推荐
-- [OpenAI API](https://openai.com/api/)
-- [API2D](https://www.api2d.com/)
+```bash
+python -m vllm.entrypoints.openai.api_server --model Qwen/Qwen2.5-7B-Instruct --port 8000
+```
 
----
+2. 配置 HiFo：
 
-## 配置参数
+```python
+llm_use_local = True
+llm_local_url = "http://localhost:8000/v1/chat/completions"
+```
+
+<br/>
+
+## 📂 项目结构
+
+```
+HiFo-Prompt/
+├── hifo/
+│   ├── src/hifo/
+│   │   ├── methods/
+│   │   │   └── hifo/
+│   │   │       ├── hifo.py                   # HiFo 主算法
+│   │   │       ├── hifo_evolution.py         # 进化算子 (i1, e1, m1 等)
+│   │   │       ├── insight_pool.py           # 🧠 回顾模块
+│   │   │       └── evolutionary_navigator.py # 🔭 前瞻模块（策略控制）
+│   │   ├── llm/                              # LLM 接口
+│   │   ├── problems/                         # 问题定义
+│   │   └── utils/                            # 参数解析与工具函数
+│   └── setup.py
+├── examples/                                 # 问题专用运行脚本（TSP、BPP 等）
+└── docs/                                     # 文档与教程
+```
+
+<br/>
+
+## 📊 配置参数
 
 | 参数 | 描述 | 默认值 |
 |------|------|--------|
@@ -212,52 +189,31 @@ python runHiFo.py
 | `eva_timeout` | 评估超时时间（秒） | `500` |
 | `exp_debug_mode` | 启用调试输出 | `False` |
 
----
+<br/>
 
-## 项目结构
+## 📜 引用
 
-```
-hifo/
-├── src/hifo/
-│   ├── methods/
-│   │   └── hifo/
-│   │       ├── hifo.py              # HiFo 主算法
-│   │       ├── hifo_interface_EC.py # 进化计算接口
-│   │       ├── hifo_evolution.py    # 进化算子
-│   │       ├── insight_pool.py           # Insight Pool 实现
-│   │       └── evolutionary_navigator.py # Evolutionary Navigator 演化导航器
-│   ├── llm/                         # LLM 接口
-│   ├── problems/                    # 问题定义
-│   └── utils/                       # 工具函数
-├── examples/                        # 示例应用
-└── setup.py
-```
-
----
-
-## 引用
-
-如果您在研究中使用了 HiFo，请引用：
+如果您觉得 HiFo-Prompt 对您的研究有帮助，请引用我们的工作：
 
 ```bibtex
-@inproceedings{hifo2025,
-  title={HiFo: Hierarchical and Feedback-driven Optimization for Automatic Algorithm Design},
-  author={},
-  booktitle={},
+@article{hifo2025,
+  title={HiFo-Prompt: Prompting with Hindsight and Foresight for LLM-based Automatic Heuristic Design},
+  author={Anonymous},
+  journal={Under Review},
   year={2025}
 }
 ```
 
----
+<br/>
 
-## 许可证
+## 📄 许可证
 
-本项目采用 MIT 许可证 - 详见 [LICENSE](./LICENSE) 文件。
+本项目采用 **MIT 许可证**。
 
 ---
 
 <div align="center">
 
-**[返回顶部](#hifo层次化反馈驱动优化框架)**
+**[⬆ 返回顶部](#hifo-prompt)**
 
 </div>

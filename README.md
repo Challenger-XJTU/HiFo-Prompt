@@ -18,6 +18,13 @@
 
 <br/>
 
+## 📢 News
+
+- **Jan. 2026**: 🎉 HiFo-Prompt has been accepted at **ICLR 2026** as a Poster!
+
+<br/>
+
+
 ## 📖 Introduction
 
 **HiFo-Prompt** (Hindsight-Foresight Prompt) is a novel framework for **Automatic Heuristic Design (AHD)** that synergizes **Large Language Models (LLMs)** with **Evolutionary Computation (EC)**.

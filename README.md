@@ -189,10 +189,10 @@ HiFo-Prompt/
 |-----------|-------------|---------|
 | `method` | Algorithm method (`hifo`, `ael`) | `hifo` |
 | `problem` | Problem type | `tsp_construct` |
-| `ec_pop_size` | Population size per generation | `5` |
-| `ec_n_pop` | Number of generations | `5` |
-| `exp_n_proc` | Number of parallel processes | `1` |
-| `eva_timeout` | Evaluation timeout (seconds) | `500` |
+| `ec_pop_size` | Population size per generation | `8` |
+| `ec_n_pop` | Number of generations | `8` |
+| `exp_n_proc` | Number of parallel processes | `4` |
+| `eva_timeout` | Evaluation timeout (seconds) | `300` |
 | `exp_debug_mode` | Enable debug output | `False` |
 
 <br/>

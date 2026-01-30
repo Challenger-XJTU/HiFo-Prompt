@@ -20,8 +20,7 @@
 
 ## 📢 News
 
-- **Jan. 2026**: 🎉 HiFo-Prompt has been accepted at **ICLR 2026** as a Poster!
-
+- **Jan. 2026**: 🎉🎉 HiFo-Prompt: Prompting with Hindsight and Foresight for LLM-based Automatic Heuristic Design has been accepted at **ICLR 2026** as a Poster!
 <br/>
 
 

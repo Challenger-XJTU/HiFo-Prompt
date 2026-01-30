@@ -50,7 +50,7 @@ conda create -n hifo python=3.10
 conda activate hifo
 
 # 2. Clone repository
-git clone https://github.com/FeiLiu36/HiFo.git
+git clone https://github.com/Challenger-XJTU/HiFo-Prompt.git
 cd HiFo
 
 # 3. Install dependencies

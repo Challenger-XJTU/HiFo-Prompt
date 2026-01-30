@@ -86,8 +86,8 @@ paras.set_paras(
     llm_api_endpoint = "api.deepseek.com", # Your API Endpoint
     llm_api_key = "sk-xxxxxxxx",        # Your API Key
     llm_model = "deepseek-chat",        # Model Name
-    ec_pop_size = 4,                    # Population size (recommended: 4-8)
-    ec_n_pop = 10,                      # Number of generations
+    ec_pop_size = 8,                    # Population size
+    ec_n_pop = 8,                      # Number of generations
     exp_n_proc = 4,                     # Parallel threads for evaluation
     exp_debug_mode = False              # Set True to see prompt construction details
 )

@@ -1,122 +1,219 @@
-<div align=center>
-<h1 align="center">
-HiFo-Prompt: Prompting with Hindsight and Foresight
-</h1>
-<h3 align="center">
-A Framework for LLM-based Automatic Heuristic Design with Evolutionary Navigator and Insight Pool
-</h3>
-Chinese Version 中文版本
-![Github-image](https://img.shields.io/badge/github-12100E.svg?style=flat-square)
+<div align="center">
 
-![License-image](https://img.shields.io/badge/License-MIT-orange?style=flat-square)
+<h1 align="center">HiFo-Prompt</h1>
 
-![Releases-image](https://img.shields.io/badge/Release-Version_1.0-blue?style=flat-square)
+<h3 align="center">Prompting with Hindsight and Foresight for LLM-based Automatic Heuristic Design</h3>
 
-![Wiki-image](https://img.shields.io/badge/Docs-Documentation-black?style=flat-square)
+<p align="center">
+<strong>🧠 Hindsight Insight Pool</strong> · <strong>🔭 Foresight Evolutionary Navigator</strong> · <strong>🔄 Closed-Loop Evolution</strong>
+</p>
+
+![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)
+![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=flat-square&logo=python&logoColor=white)
+![Release](https://img.shields.io/badge/Release-v1.0.0-green?style=flat-square)
+
+[English](./README.md) · [中文 (Chinese)](./README_CN.md)
+
 </div>
-<br>
-[!Important]
-HiFo-Prompt represents the next generation of LLM-based AHD, addressing the lack of global control and knowledge accumulation in previous methods like EoH and ReEvo.
-A Platform for Evolutionary Computation + Large Language Model with Self-Evolving Knowledge and Adaptive Control.
-<img src="./docs/figures/framework.jpg" alt="hifo_framework" width="800" height="auto" div align=center>
-News 🔥
-2025.8 🎉🎉 HiFo-Prompt has been released! It achieves state-of-the-art performance on TSP, Online BPP, and FSSP, significantly outperforming EoH and ReEvo in both solution quality and convergence speed.
-2025.8, The paper HiFo-Prompt: Prompting with Hindsight and Foresight for LLM-based Automatic Heuristic Design has been uploaded to Arxiv!
-2025.8, We have released the code for Bayesian Optimization (Cost-aware Acquisition Functions), demonstrating HiFo's capability in continuous optimization tasks.
-Introduction 📖
-While LLM-based Automatic Heuristic Design (AHD) has shown promise, existing methods suffer from two main limitations: the use of static operators (lack of Foresight) and the inability to reuse learned principles (lack of Hindsight).
-HiFo-Prompt introduces a novel framework that synergizes two key strategies:
-Foresight (Evolutionary Navigator): Acts as a high-level meta-controller that monitors population dynamics (e.g., stagnation, diversity). It adaptively switches the search strategy between Explore, Exploit, and Balance regimes.
-Hindsight (Insight Pool): Builds a persistent knowledge base by distilling successful design principles from elite heuristics. This transforms transient discoveries into reusable knowledge, preventing the LLM from "reinventing the wheel."
-<img src="./docs/figures/convergence.jpg" alt="convergence" width="1000" height="auto" div align=center>
-HiFo-Prompt demonstrates remarkable sample efficiency. As shown in the figure above, it converges significantly faster than EoH and ReEvo, often finding superior solutions with only 200 LLM requests.
-If you find HiFo-Prompt helpful for your research or applied projects:
-code
-Bibtex
-@article{chen2025hifo,
-  title={HiFo-Prompt: Prompting with Hindsight and Foresight for LLM-based Automatic Heuristic Design},
-  author={Chen, Chentong and Zhong, Mengyuan and Sun, Jianyong and Fan, Ye and Shi, Jialong},
-  journal={arXiv preprint arXiv:2508.13333},
-  year={2025}
-}
-If you are interested in HiFo-Prompt, you can:
-Contact us through email (see paper).
-Submit an issue if you encounter any difficulty.
-Requirements
-python >= 3.10
-numba
-numpy
-scikit-learn
-joblib
-HiFo-Prompt Example Usage 💻
-Step 1: Install HiFo
-We suggest install and run HiFo in conda env with python>=3.10
-code
-Bash
-cd hifo
 
-pip install .
-Step 2: Try Example:
-<span style="color: red;">Setup your Endpoint and Key for remote LLM or Setup your local LLM before start !</span>
-For example, set the llm_api_endpoint to "dashscope.aliyuncs.com" (for Qwen), set llm_api_key to "your key", and set llm_model to "qwen-2.5-max".
-code
-Python
+<br/>
+
+## 📖 Introduction
+
+**HiFo-Prompt** (Hindsight-Foresight Prompt) is a novel framework for **Automatic Heuristic Design (AHD)** that synergizes **Large Language Models (LLMs)** with **Evolutionary Computation (EC)**.
+
+Existing LLM-based methods often suffer from *short-term memory* (forgetting successful tricks) and *lack of direction* (randomly searching without a strategy). HiFo-Prompt solves this by introducing two key mechanisms:
+
+- **🧠 Hindsight (The Insight Pool)**: A self-evolving knowledge base that distills and stores "design principles" from high-performing heuristics, preventing the system from reinventing the wheel.
+
+- **🔭 Foresight (The Evolutionary Navigator)**: A meta-controller that monitors population dynamics (stagnation, diversity) and actively switches search regimes (*Explore*, *Exploit*, or *Balance*) via specific **Design Directives**.
+
+<br/>
+
+## 🔥 Key Features
+
+| Component | Function | Why it matters |
+|-----------|----------|----------------|
+| **Insight Pool** | Extracts & Reuses Knowledge | Instead of discarding parents, we extract *why* they worked. The prompts are augmented with proven "Insights". |
+| **Evolutionary Navigator** | Adaptive Control | Detects if the search is stuck (stagnation) or too narrow (low diversity) and dynamically adjusts the prompt strategy. |
+| **Decoupled Evaluation** | Efficient Pipeline | Decouples "Thought" from "Code", allowing for faster iteration and lower token consumption compared to standard methods. |
+
+<br/>
+
+## 🛠️ Installation
+
+We recommend using **Conda** to manage the environment.
+
+```bash
+# 1. Create environment
+conda create -n hifo python=3.10
+conda activate hifo
+
+# 2. Clone repository
+git clone https://github.com/FeiLiu36/HiFo.git
+cd HiFo
+
+# 3. Install dependencies
+cd hifo
+pip install -e .
+```
+
+<br/>
+
+## 🚀 Quick Start
+
+> **Note**: You must have an LLM API key (e.g., OpenAI, DeepSeek, Qwen) or a local LLM server running.
+
+### 1. Basic Usage Structure
+
+```python
 from hifo import hifo
 from hifo.utils.getParas import Paras
 
-# Parameter initilization #
+# 1. Initialize Parameters
 paras = Paras() 
 
-# Set parameters #
-paras.set_paras(method = "hifo",    # ['eoh','hifo']
-                problem = "tsp_construct", #['tsp_construct','bp_online', 'fssp_gls']
-                llm_api_endpoint = "xxx", # set your LLM endpoint
-                llm_api_key = "xxx",   # set your LLM key
-                llm_model = "qwen-max",
-                ec_pop_size = 4, # HiFo works well with small populations
-                ec_n_pop = 8,  # number of generations
-                exp_n_proc = 4,  # multi-core parallel
-                exp_debug_mode = False)
+# 2. Configure HiFo
+paras.set_paras(
+    method = "hifo",               
+    problem = "tsp_construct",          # Problem: 'tsp_construct', 'bp_online'
+    llm_api_endpoint = "api.deepseek.com", # Your API Endpoint
+    llm_api_key = "sk-xxxxxxxx",        # Your API Key
+    llm_model = "deepseek-chat",        # Model Name
+    ec_pop_size = 4,                    # Population size (recommended: 4-8)
+    ec_n_pop = 10,                      # Number of generations
+    exp_n_proc = 4,                     # Parallel threads for evaluation
+    exp_debug_mode = False              # Set True to see prompt construction details
+)
 
-# initilization
+# 3. Initialize & Run
 evolution = hifo.EVOL(paras)
-
-# run 
 evolution.run()
-HiFo uses Step-by-Step Construction strategies to evolve superior node selection heuristics.
-code
-Bash
+```
+
+### 2. Running Examples
+
+We provide ready-to-run scripts for standard combinatorial optimization problems.
+
+#### Traveling Salesman Problem (TSP)
+
+Constructive heuristic design for TSP.
+
+```bash
 cd examples/tsp_construct
-
 python runHiFo.py
-(<span style="color: red;">Beat state-of-the-art handcrafted heuristics (Best Fit) and LLM-based methods (EoH) with fewer queries!</span>)
-code
-Bash
+```
+
+#### Online Bin Packing (BPP)
+
+Designing scoring functions for online packing.
+
+```bash
 cd examples/bp_online
-
 python runHiFo.py
-Evolving the Edge Update Strategy for Guided Local Search.
-code
-Bash
-cd examples/fssp_gls
+```
 
+#### Custom Problem
+
+```bash
+cd examples/user_XXX
 python runHiFo.py
-More Examples using HiFo-Prompt Platform
-Area	Problem	Paper	Code
-Combinatorial Optimization	Online Bin Packing, scoring function	paper	code
-TSP, construct heuristic	paper	code
-TSP, guided local search (GLS)	paper	code
-Flow Shop Scheduling Problem (FSSP), GLS	paper	code
-Bayesian Optimization	Cost-aware Acquisition Function Design	paper	code
-LLMs
-Remote LLM + API (e.g., Qwen-2.5, GPT-4o, Deepseek) (Recommended !):
-Qwen (Alibaba): Recommended in the paper for high performance.
-OpenAI API.
-Deepseek API.
-Local LLM Deployment:
-Similar to EoH, HiFo supports local deployment via vLLM or HuggingFace text-generation-inference.
-Simply configure the url in your parameter settings.
-Contributors
-<img src="https://github.com/chentong-chen.png" width="60" div align=center> Chentong Chen
-<img src="https://github.com/my-zhong.png" width="60" div align=center> Mengyuan Zhong
-<img src="https://github.com/jialong-shi.png" width="60" div align=center> Jialong Shi
+```
+
+<br/>
+
+## ⚙️ LLM Configuration
+
+HiFo-Prompt supports both **remote APIs** and **local LLM deployment**.
+
+### Option A: Remote API (Recommended)
+
+Supported protocols: OpenAI-compatible APIs (DeepSeek, Moonshot, ChatGPT, etc.).
+
+Modify `runHiFo.py`:
+
+```python
+llm_api_endpoint = "api.openai.com" 
+llm_api_key = "your_key"
+llm_model = "gpt-4o"
+```
+
+### Option B: Local LLM (vLLM / HuggingFace)
+
+1. Start your local server (e.g., using vLLM):
+
+```bash
+python -m vllm.entrypoints.openai.api_server --model Qwen/Qwen2.5-7B-Instruct --port 8000
+```
+
+2. Configure HiFo:
+
+```python
+llm_use_local = True
+llm_local_url = "http://localhost:8000/v1/chat/completions"
+```
+
+<br/>
+
+## 📂 Project Structure
+
+```
+HiFo-Prompt/
+├── hifo/
+│   ├── src/hifo/
+│   │   ├── methods/
+│   │   │   └── hifo/
+│   │   │       ├── hifo.py                   # Main HiFo Algorithm
+│   │   │       ├── hifo_evolution.py         # Evolution Operators (i1, e1, m1, etc.)
+│   │   │       ├── insight_pool.py           # 🧠 Hindsight Module
+│   │   │       └── evolutionary_navigator.py # 🔭 Foresight Module (Regime Control)
+│   │   ├── llm/                              # LLM Interfaces
+│   │   ├── problems/                         # Problem Definitions
+│   │   └── utils/                            # Parameter parsing & helpers
+│   └── setup.py
+├── examples/                                 # Problem-specific runners (TSP, BPP, etc.)
+└── docs/                                     # Documentation & Tutorials
+```
+
+<br/>
+
+## 📊 Configuration Options
+
+| Parameter | Description | Default |
+|-----------|-------------|---------|
+| `method` | Algorithm method (`hifo`, `ael`) | `hifo` |
+| `problem` | Problem type | `tsp_construct` |
+| `ec_pop_size` | Population size per generation | `5` |
+| `ec_n_pop` | Number of generations | `5` |
+| `exp_n_proc` | Number of parallel processes | `1` |
+| `eva_timeout` | Evaluation timeout (seconds) | `500` |
+| `exp_debug_mode` | Enable debug output | `False` |
+
+<br/>
+
+## 📜 Citation
+
+If you find HiFo-Prompt useful for your research, please cite our work:
+
+```bibtex
+@article{hifo2025,
+  title={HiFo-Prompt: Prompting with Hindsight and Foresight for LLM-based Automatic Heuristic Design},
+  author={Anonymous},
+  journal={Under Review},
+  year={2025}
+}
+```
+
+<br/>
+
+## 📄 License
+
+This project is licensed under the **MIT License**.
+
+---
+
+<div align="center">
+
+**[⬆ Back to Top](#hifo-prompt)**
+
+</div>

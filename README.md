@@ -26,6 +26,11 @@
 
 ## 📖 Introduction
 
+<div align="center">
+  <img src="./assets/framework.pdf" width="100%">
+  <p><em>The framework of HiFo-Prompt</em></p>
+</div>
+
 **HiFo-Prompt** (Hindsight-Foresight Prompt) is a novel framework for **Automatic Heuristic Design (AHD)** that synergizes **Large Language Models (LLMs)** with **Evolutionary Computation (EC)**.
 
 Existing LLM-based methods often suffer from *short-term memory* (forgetting successful tricks) and *lack of direction* (randomly searching without a strategy). HiFo-Prompt solves this by introducing two key mechanisms:
@@ -35,6 +40,11 @@ Existing LLM-based methods often suffer from *short-term memory* (forgetting suc
 - **🔭 Foresight (The Evolutionary Navigator)**: A meta-controller that monitors population dynamics (stagnation, diversity) and actively switches search regimes (*Explore*, *Exploit*, or *Balance*) via specific **Design Directives**.
 
 <br/>
+
+<div align="center">
+  <img src="./assets/example.pdf" width="100%">
+  <p><em>Dynamic prompt generation process of HiFo-Prompt</em></p>
+</div>
 
 ## 🔥 Key Features
 
@@ -218,7 +228,7 @@ Support Us: If HiFo-Prompt aids your research or if you like our approach, pleas
 
 ## ✨ Acknowledgments  
 
----
+Our work builds upon [EoH](https://github.com/FeiLiu36/EoH) and [ReEvo](https://github.com/ai4co/reevo), and we thank the authors for their inspiring work. We also acknowledge [LLM4AD](https://github.com/Optima-CityU/LLM4AD) and [FM4CO](https://github.com/ai4co/awesome-fm4co) for their valuable learning resources on LLM-based AHD.
 
 <div align="center">
 

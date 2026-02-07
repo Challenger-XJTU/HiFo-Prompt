@@ -216,9 +216,9 @@ HiFo-Prompt/
 
 <br/>
 
-## 📄 许可证
+## ✨ 致谢
 
-本项目采用 **MIT 许可证**。
+我们的工作基于[EoH](https://github.com/FeiLiu36/EoH)和[ReEvo](https://github.com/ai4co/reevo)，感谢这些作者所做的富有启发性的工作。我们还感谢[LLM4AD](https://github.com/Optima-CityU/LLM4AD)和[FM4CO](https://github.com/ai4co/awesome-fm4co)平台提供的有关基于大语言模型的自动启发式设计的宝贵学习资源。
 
 ---
 

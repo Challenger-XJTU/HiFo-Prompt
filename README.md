@@ -18,6 +18,8 @@
 
 <br/>
 
+Welcome! This repository provides the code implementation for the paper [HiFo-Prompt: Prompting with Hindsight and Foresight for LLM-based Automatic Heuristic Design](https://arxiv.org/abs/2508.13333).
+
 ## 📢 News
 
 - **Jan. 2026**: 🎉🎉 HiFo-Prompt: Prompting with Hindsight and Foresight for LLM-based Automatic Heuristic Design has been accepted at **ICLR 2026** as a Poster!
@@ -215,13 +217,16 @@ We are actively maintaining HiFo-Prompt and thrilled to hear from the community!
 - Collaboration: We are open to discussions on AHD and LLMs. Feel free to reach out via email or pull requests. Let's push the boundaries of automated algorithm design together! 🤝
 
 Support Us: If HiFo-Prompt aids your research or if you like our approach, please Star ⭐ or Fork 🍴 this repository. Your support drives our updates!
+
 ```bibtex
-@article{hifo2025,
-  title={HiFo-Prompt: Prompting with Hindsight and Foresight for LLM-based Automatic Heuristic Design},
-  author={Anonymous},
-  journal={Under Review},
-  year={2025}
+@inproceedings{chen2026hifo,
+  title     = {HiFo-Prompt: Prompting with Hindsight and Foresight for LLM-based Automatic Heuristic Design},
+  author    = {Chen, Chentong and Zhong, Mengyuan and Fan, Ye and Shi, Jialong and Sun, Jianyong},
+  booktitle = {International Conference on Learning Representations},
+  year      = {2026},
+  url       = {https://openreview.net/forum?id=imSLzfZ6av}
 }
+
 ```
 
 <br/>

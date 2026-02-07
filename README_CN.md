@@ -18,6 +18,8 @@
 
 <br/>
 
+欢迎！这里是论文[HiFo-Prompt](https://arxiv.org/abs/2508.13333)的代码实现。
+
 ## 📢 新闻
 
 - **2026 年 1 月**：🎉 HiFo-Prompt:基于回顾与前瞻提示的大模型自动启发式算法设计 被 **ICLR 2026** 接收为 Poster！
@@ -216,11 +218,12 @@ HiFo-Prompt/
 支持我们： 如果 HiFo-Prompt 对您的研究有帮助，或者您喜欢我们的方法，请为本仓库 点亮 Star ⭐ 或 Fork 🍴。您的支持是我们更新的动力！
 
 ```bibtex
-@article{hifo2025,
-  title={HiFo-Prompt: Prompting with Hindsight and Foresight for LLM-based Automatic Heuristic Design},
-  author={Anonymous},
-  journal={Under Review},
-  year={2025}
+@inproceedings{chen2026hifo,
+  title     = {HiFo-Prompt: Prompting with Hindsight and Foresight for LLM-based Automatic Heuristic Design},
+  author    = {Chen, Chentong and Zhong, Mengyuan and Fan, Ye and Shi, Jialong and Sun, Jianyong},
+  booktitle = {International Conference on Learning Representations},
+  year      = {2026},
+  url       = {https://openreview.net/forum?id=imSLzfZ6av}
 }
 ```
 

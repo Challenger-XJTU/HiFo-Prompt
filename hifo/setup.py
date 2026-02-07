@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 setup(
     name="hifo",
     version="0.1",
-    author="MetaAI Group, CityU",
-    description="HiFo: Hierarchical and Feedback-driven Optimization with LLM for automatic algorithm design",
+    author="Shi Group, XJTU",
+    description="HiFo-Prompt: Prompting with Hindsight and Foresight for LLM-based Automatic Heuristic Design",
     packages=find_packages(where='src'),
     package_dir={'': 'src'},
     python_requires=">=3.10",

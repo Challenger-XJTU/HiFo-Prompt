@@ -27,7 +27,7 @@
 ## 📖 Introduction
 
 <div align="center">
-  <img src="assets/framework.pdf" width="100%">
+  <img src="./assets/framework.jpg" width="100%">
   <p><em>The framework of HiFo-Prompt</em></p>
 </div>
 
@@ -42,7 +42,7 @@ Existing LLM-based methods often suffer from *short-term memory* (forgetting suc
 <br/>
 
 <div align="center">
-  <img src="assets/example.pdf" width="100%">
+  <img src="assets/example.jpg" width="100%">
   <p><em>Dynamic prompt generation process of HiFo-Prompt</em></p>
 </div>
 

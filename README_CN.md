@@ -26,6 +26,11 @@
 
 ## 📖 简介
 
+<div align="center">
+  <img src="./assets/framework.jpg" width="100%">
+  <p><em>The framework of HiFo-Prompt</em></p>
+</div>
+
 **HiFo-Prompt**（Hindsight-Foresight Prompt，回顾-前瞻提示）是一个创新的 **自动启发式算法设计（AHD)** 框架，将 **大语言模型(LLM)** 与 **进化计算（EC）** 协同结合。
 
 现有的基于 LLM 的方法通常存在*短期记忆*（遗忘成功的技巧）和*缺乏方向*（随机搜索无策略）的问题。HiFo-Prompt 通过引入两个关键机制解决了这些问题：
@@ -35,6 +40,11 @@
 - **🔭 前瞻（Evolutionary Navigator 演化导航器）**：一个元控制器，监控种群动态（停滞、多样性），并通过特定的**设计指令（Design Directive）** 主动切换搜索策略（ *探索 Explore*、*利用 Exploit* 或 *平衡 Balance*）。
 
 <br/>
+
+<div align="center">
+  <img src="assets/example.jpg" width="100%">
+  <p><em>Dynamic prompt generation process of HiFo-Prompt</em></p>
+</div>
 
 ## 🔥 核心特性
 
